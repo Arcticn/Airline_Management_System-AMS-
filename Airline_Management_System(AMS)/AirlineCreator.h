@@ -10,5 +10,5 @@ private:
 	string LineNoCreator();
 	string CompanyCreator();
 	int AirplaneCreator(); //об╠Й
-	vector<string>DestinationCreator(int depart, int number);
+	vector<int>DestinationCreator(int depart, int number);
 };

@@ -1,13 +1,16 @@
 #include "AMS.h"
 
 void AirlineCreator::Creator() {
-	for (size_t i = 0,length=AirportDatabase.size(); i < length; i++)
+	for (size_t i = 0, length = AirportDatabase.size(); i < length; i++)
 	{
-		vector<string>Destination(DestinationCreator(i,20));
+		vector<int>Destination(DestinationCreator(static_cast<int>(i), 30));
 		for (size_t j = 0; j < 30; j++)
 		{
 			int planeid = AirplaneCreator();
-			AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(), AirportDatabase[i].AirportName, Destination[j], AirplaneDatabase[planeid].Model, AirplaneDatabase[planeid].Maxpassenger));
+			while (AirplaneDatabase[planeid].MaxRange < DistanceCalc(AirportDatabase[i].Latitude, AirportDatabase[i].Longitude, AirportDatabase[Destination[j]].Latitude, AirportDatabase[Destination[j]].Longitude)) {
+				planeid = AirplaneCreator();
+			}
+			AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(), AirportDatabase[i].AirportName, AirportDatabase[Destination[j]].AirportName, AirplaneDatabase[planeid].Model, AirplaneDatabase[planeid].Maxpassenger));
 		}
 	}
 	return;
@@ -42,7 +45,7 @@ string AirlineCreator::LineNoCreator() {
 
 string AirlineCreator::CompanyCreator() {
 	default_random_engine e;
-	uniform_int_distribution<unsigned> u(0,Company.size()-1);
+	uniform_int_distribution<unsigned> u(0, static_cast<int>(Company.size()) - 1);
 	auto end = high_resolution_clock::now();
 	nano_type diff = end - start;
 	e.seed(diff.count());
@@ -51,27 +54,27 @@ string AirlineCreator::CompanyCreator() {
 
 int AirlineCreator::AirplaneCreator() {
 	default_random_engine e;
-	uniform_int_distribution<unsigned> u(0, AirplaneDatabase.size()-1);
+	uniform_int_distribution<unsigned> u(0, static_cast<int>(AirplaneDatabase.size()) - 1);
 	auto end = high_resolution_clock::now();
 	nano_type diff = end - start;
 	e.seed(diff.count());
 	return u(e);
 }
 
-vector<string> AirlineCreator::DestinationCreator(int depart,int number) {
-	set<int>DesId={depart};
-	vector<string>Destination;
-	default_random_engine e;	
+vector<int> AirlineCreator::DestinationCreator(int depart, int number) {
+	set<int>DesId = { depart };
+	vector<int>Destination;
+	default_random_engine e;
 	auto end = high_resolution_clock::now();
-	uniform_int_distribution<unsigned> u(0, AirportDatabase.size() - 1);
-	int cnt = 0,ran=0;
-	while (cnt != 30) {
+	uniform_int_distribution<unsigned> u(0, static_cast<int>(AirportDatabase.size()) - 1);
+	int cnt = 0, ran = 0;
+	while (cnt != number) {
 		end = high_resolution_clock::now();
 		nano_type diff = end - start;
 		e.seed(diff.count());
 		ran = u(e);
 		if (!DesId.count(ran)) {
-			Destination.emplace_back(AirportDatabase[ran].AirportName);
+			Destination.emplace_back(ran);
 			++cnt;
 		}
 	}

@@ -2,8 +2,8 @@
 class Passenger
 {
 public:
-    Passenger() {};
-    ~Passenger() {};
+    Passenger();
+    ~Passenger();
     string name;
 private:
 
