@@ -45,6 +45,15 @@
     <ClCompile Include="File.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="AirlineInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Airplane.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Passenger.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AMS.h">
@@ -77,5 +86,25 @@
     <ClInclude Include="File.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AirlineInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Airport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Airplane.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Passenger.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Airport.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Company.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

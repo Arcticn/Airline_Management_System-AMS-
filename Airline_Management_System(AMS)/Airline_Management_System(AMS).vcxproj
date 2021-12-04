@@ -141,11 +141,14 @@
   <ItemGroup>
     <ClCompile Include="AirlineBoard.cpp" />
     <ClCompile Include="AirlineCreator.cpp" />
+    <ClCompile Include="AirlineInfo.cpp" />
     <ClCompile Include="Airline_Management_System(AMS).cpp" />
+    <ClCompile Include="Airplane.cpp" />
     <ClCompile Include="Airport.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Passenger.cpp" />
     <ClCompile Include="SuperUserInterface.cpp" />
     <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="Weather.cpp" />
@@ -153,14 +156,22 @@
   <ItemGroup>
     <ClInclude Include="AirlineBoard.h" />
     <ClInclude Include="AirlineCreator.h" />
+    <ClInclude Include="AirlineInfo.h" />
+    <ClInclude Include="Airplane.h" />
+    <ClInclude Include="Airport.h" />
     <ClInclude Include="AMS.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Login.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Passenger.h" />
     <ClInclude Include="SuperUserInterface.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="Weather.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Airport.txt" />
+    <Text Include="Company.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
