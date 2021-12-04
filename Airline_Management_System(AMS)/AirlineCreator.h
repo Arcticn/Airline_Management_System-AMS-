@@ -10,7 +10,7 @@ private:
 	string LineNoCreator();
 	string CompanyCreator();
 	int AirplaneCreator(); //об╠Й
-	string DestinationCreator(int depart);
+	vector<string>DestinationCreator(int depart, int number);
 
 
 };

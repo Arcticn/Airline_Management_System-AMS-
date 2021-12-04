@@ -3,9 +3,13 @@
 AirlineInfo AirlineCreator::Creator() {
 	for (size_t i = 0,length=AirportDatabase.size(); i < length; i++)
 	{
-		int planeid = AirplaneCreator();
+		vector<string>Destination(DestinationCreator(i,20));
+		for (size_t j = 0; j < 20; j++)
+		{
+			int planeid = AirplaneCreator();
+			AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(), AirportDatabase[i].AirportName, Destination[j], AirplaneDatabase[planeid].Type, AirplaneDatabase[planeid].Maxpassenger));
 
-		AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(),AirportDatabase[i].AirportName,DestinationCreator(), AirplaneDatabase[planeid].Type, AirplaneDatabase[planeid].Maxpassenger));
+		}
 	}
 
 }
@@ -57,14 +61,17 @@ int AirlineCreator::AirplaneCreator() {
 	return u(e);
 }
 
-string AirlineCreator::DestinationCreator(int depart) {
+vector<string> AirlineCreator::DestinationCreator(int depart,int number) {
+	set<int>DesId={depart};
+	vector<string>Destination;
 	default_random_engine e;
+	
 	uniform_int_distribution<unsigned> u(0, AirportDatabase.size() - 1);
 	auto end = high_resolution_clock::now();
 	end = high_resolution_clock::now();
 	nano_type diff = end - start;
 	e.seed(diff.count());
-	return AirportDatabase[u(e)].AirportName;
+	return Destination;
 }
 
 
