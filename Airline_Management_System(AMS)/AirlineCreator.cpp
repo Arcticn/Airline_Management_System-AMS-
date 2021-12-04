@@ -1,5 +1,15 @@
 #include "AMS.h"
 
+AirlineInfo AirlineCreator::Creator() {
+	for (size_t i = 0,length=AirportDatabase.size(); i < length; i++)
+	{
+		int planeid = AirplaneCreator();
+
+		AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(),AirportDatabase[i].AirportName,DestinationCreator(), AirplaneDatabase[planeid].Type, AirplaneDatabase[planeid].Maxpassenger));
+	}
+
+}
+
 //LineNo Creator
 string AirlineCreator::LineNoCreator() {
 	auto end = high_resolution_clock::now();
@@ -26,6 +36,39 @@ string AirlineCreator::LineNoCreator() {
 	}
 	return LineNo;
 }
+
+string AirlineCreator::CompanyCreator() {
+	default_random_engine e;
+	uniform_int_distribution<unsigned> u(0,Company.size()-1);
+	auto end = high_resolution_clock::now();
+	end = high_resolution_clock::now();
+	nano_type diff = end - start;
+	e.seed(diff.count());
+	return Company[u(e)];
+}
+
+int AirlineCreator::AirplaneCreator() {
+	default_random_engine e;
+	uniform_int_distribution<unsigned> u(0, AirplaneDatabase.size()-1);
+	auto end = high_resolution_clock::now();
+	end = high_resolution_clock::now();
+	nano_type diff = end - start;
+	e.seed(diff.count());
+	return u(e);
+}
+
+string AirlineCreator::DestinationCreator(int depart) {
+	default_random_engine e;
+	uniform_int_distribution<unsigned> u(0, AirportDatabase.size() - 1);
+	auto end = high_resolution_clock::now();
+	end = high_resolution_clock::now();
+	nano_type diff = end - start;
+	e.seed(diff.count());
+	return AirportDatabase[u(e)].AirportName;
+}
+
+
+
 /*
 int main() {
 	int cnt = 0;
@@ -40,27 +83,3 @@ int main() {
 	cout << diff.count();
 }
 */
-
-string AirlineCreator::CompanyCreator() {
-	default_random_engine e;
-	uniform_int_distribution<unsigned> u(0,Company.size()-1);
-	auto end = high_resolution_clock::now();
-	end = high_resolution_clock::now();
-	nano_type diff = end - start;
-	e.seed(diff.count());
-	return Company[u(e)];
-}
-
-string AirlineCreator::AirplaneCreator() {
-	//temp
-	vector<string>company(27);
-
-	string Company;
-	default_random_engine e;
-	uniform_int_distribution<unsigned> u(0, 26);
-	auto end = high_resolution_clock::now();
-	end = high_resolution_clock::now();
-	nano_type diff = end - start;
-	e.seed(diff.count());
-	return company[u(e)];
-}

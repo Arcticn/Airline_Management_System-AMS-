@@ -104,6 +104,9 @@
     <ClInclude Include="Time.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="QuickUse.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Airport.txt">

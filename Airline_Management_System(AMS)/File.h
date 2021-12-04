@@ -8,6 +8,7 @@ private:
 	void ReadCompany();
 	void ReadAirport();
 	void ReadAirplane();
+	void ReadAirlineInfo();
 
 };
 

@@ -166,6 +166,7 @@
     <ClInclude Include="Login.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Passenger.h" />
+    <ClInclude Include="QuickUse.h" />
     <ClInclude Include="SuperUserInterface.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="UserInterface.h" />
