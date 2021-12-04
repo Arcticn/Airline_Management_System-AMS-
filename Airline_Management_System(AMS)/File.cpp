@@ -15,3 +15,8 @@ void File::ReadAirport() {
 		
 	}
 }
+
+void File::ReadAirplane()
+{
+
+}

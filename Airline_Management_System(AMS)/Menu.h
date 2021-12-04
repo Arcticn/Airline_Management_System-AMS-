@@ -1,7 +1,6 @@
 #pragma once
 
-class Menu {
-public:
+struct Menu {
 	void SuperUserMenu();
 	void UserMenu();
 	bool StartMenu();

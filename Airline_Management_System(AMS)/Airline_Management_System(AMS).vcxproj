@@ -170,6 +170,7 @@
     <ClInclude Include="Weather.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Airplane.txt" />
     <Text Include="Airport.txt" />
     <Text Include="Company.txt" />
   </ItemGroup>

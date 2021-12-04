@@ -106,5 +106,8 @@
     <Text Include="Company.txt">
       <Filter>资源文件</Filter>
     </Text>
+    <Text Include="Airplane.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

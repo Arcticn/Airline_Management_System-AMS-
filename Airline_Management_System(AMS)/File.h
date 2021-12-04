@@ -7,6 +7,7 @@ public:
 private:
 	void ReadCompany();
 	void ReadAirport();
+	void ReadAirplane();
 	vector<string>Company;
 };
 
