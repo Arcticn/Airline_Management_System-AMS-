@@ -1,17 +1,16 @@
 #include "AMS.h"
 
-AirlineInfo AirlineCreator::Creator() {
+void AirlineCreator::Creator() {
 	for (size_t i = 0,length=AirportDatabase.size(); i < length; i++)
 	{
 		vector<string>Destination(DestinationCreator(i,20));
-		for (size_t j = 0; j < 20; j++)
+		for (size_t j = 0; j < 30; j++)
 		{
 			int planeid = AirplaneCreator();
-			AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(), AirportDatabase[i].AirportName, Destination[j], AirplaneDatabase[planeid].Type, AirplaneDatabase[planeid].Maxpassenger));
-
+			AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(), AirportDatabase[i].AirportName, Destination[j], AirplaneDatabase[planeid].Model, AirplaneDatabase[planeid].Maxpassenger));
 		}
 	}
-
+	return;
 }
 
 //LineNo Creator
@@ -45,7 +44,6 @@ string AirlineCreator::CompanyCreator() {
 	default_random_engine e;
 	uniform_int_distribution<unsigned> u(0,Company.size()-1);
 	auto end = high_resolution_clock::now();
-	end = high_resolution_clock::now();
 	nano_type diff = end - start;
 	e.seed(diff.count());
 	return Company[u(e)];
@@ -55,7 +53,6 @@ int AirlineCreator::AirplaneCreator() {
 	default_random_engine e;
 	uniform_int_distribution<unsigned> u(0, AirplaneDatabase.size()-1);
 	auto end = high_resolution_clock::now();
-	end = high_resolution_clock::now();
 	nano_type diff = end - start;
 	e.seed(diff.count());
 	return u(e);
@@ -64,29 +61,19 @@ int AirlineCreator::AirplaneCreator() {
 vector<string> AirlineCreator::DestinationCreator(int depart,int number) {
 	set<int>DesId={depart};
 	vector<string>Destination;
-	default_random_engine e;
-	
-	uniform_int_distribution<unsigned> u(0, AirportDatabase.size() - 1);
+	default_random_engine e;	
 	auto end = high_resolution_clock::now();
-	end = high_resolution_clock::now();
-	nano_type diff = end - start;
-	e.seed(diff.count());
+	uniform_int_distribution<unsigned> u(0, AirportDatabase.size() - 1);
+	int cnt = 0,ran=0;
+	while (cnt != 30) {
+		end = high_resolution_clock::now();
+		nano_type diff = end - start;
+		e.seed(diff.count());
+		ran = u(e);
+		if (!DesId.count(ran)) {
+			Destination.emplace_back(AirportDatabase[ran].AirportName);
+			++cnt;
+		}
+	}
 	return Destination;
 }
-
-
-
-/*
-int main() {
-	int cnt = 0;
-	vector<string>a;
-	while (cnt != 3000) {
-		a.emplace_back(LineNoCreator());
-		cnt++;
-		this_thread::sleep_for(chrono::nanoseconds(1));
-	}
-	auto end = high_resolution_clock::now();
-	duration<double>diff = end - start;
-	cout << diff.count();
-}
-*/

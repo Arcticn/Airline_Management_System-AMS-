@@ -2,6 +2,8 @@
 
 int main()
 {
+    File file;
+    file.Read();
     Menu menu;
     AirlineCreator airlinecreator;
     airlinecreator.Creator();

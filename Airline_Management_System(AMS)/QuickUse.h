@@ -1,17 +1,17 @@
 #pragma once
 #include <corecrt_math_defines.h>
 
-double rad(double d);
-double DistanceCalc(double lat1, double lat2, double lng1, double lng2);
+inline double rad(double d);
+inline double DistanceCalc(double lat1, double lat2, double lng1, double lng2);
 
 constexpr double EARTH_RADIUS = 6371.004;
 
-double rad(double d)
+inline double rad(double d)
 {
     return d * M_PI / 180.0;
 }
 
-double DistanceCalc(double lat1, double lat2, double lng1, double lng2)
+inline double DistanceCalc(double lat1, double lat2, double lng1, double lng2)
 {
     double radLat1 = rad(lat1);
     double radLat2 = rad(lat2);

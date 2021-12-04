@@ -1,5 +1,10 @@
 #include "AMS.h"
 
+vector<string>Company;
+vector<Airplane>AirplaneDatabase;
+vector<Airport>AirportDatabase;
+vector<AirlineInfo>AirlineInfoDatabase;
+
 void File::Read() {
 	ReadCompany();
 	ReadAirport();
@@ -35,7 +40,7 @@ void File::ReadAirplane()
 	while (getline(in, line)) {
 		Airplane info; 
 		istringstream record(line);
-		record >> info.Type >> info.Speed >> info.Maxpassenger >> info.MaxRange;
+		record >> info.Model >> info.Speed >> info.Maxpassenger >> info.MaxRange;
 		info.Speed *= Ma;//马赫速度转换，默认构造
 		AirplaneDatabase.emplace_back(info);
 	}
