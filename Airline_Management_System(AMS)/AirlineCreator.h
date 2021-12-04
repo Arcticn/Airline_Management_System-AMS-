@@ -7,5 +7,5 @@ class AirlineCreator {
 	AirlineInfo Creator();
 	string LineNoCreator();
 	string CompanyCreator();
-	string NameCreator();
+	string AirplaneCreator();
 };

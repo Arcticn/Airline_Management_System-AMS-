@@ -1,22 +1,42 @@
 #include "AMS.h"
 
+void File::Read() {
+	ReadCompany();
+	ReadAirport();
+	ReadAirplane();
+}
+
 void File::ReadCompany() {
 	ifstream in("Company.txt");
 	string t;
 	while (in >> t) {
-		Company.push_back(t);
+		Company.emplace_back(t);
 	}
 }
 
 void File::ReadAirport() {
 	ifstream in("Airport.txt");
-	string t;
-	while (getline(in,t)) {
-		
+	string line;
+	while (getline(in, line)) {
+		Airport info; string City;
+		istringstream record(line);
+		record >> City;
+		while (record >> info.AirportName >> info.AirportCode >> info.Latitude >> info.Longitude) {
+			info.City = City;
+			AirportDatabase.emplace_back(info);
+		}
 	}
 }
 
 void File::ReadAirplane()
 {
-
+	ifstream in("Airplane.txt");
+	string line;
+	while (getline(in, line)) {
+		Airplane info; 
+		istringstream record(line);
+		record >> info.Type >> info.Speed >> info.Maxpassenger >> info.MaxRange;
+		info.Speed *= Ma;//马赫速度转换，默认构造
+		AirplaneDatabase.emplace_back(info);
+	}
 }

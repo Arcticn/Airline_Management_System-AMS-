@@ -42,12 +42,22 @@ int main() {
 */
 
 string AirlineCreator::CompanyCreator() {
+	default_random_engine e;
+	uniform_int_distribution<unsigned> u(0,Company.size()-1);
+	auto end = high_resolution_clock::now();
+	end = high_resolution_clock::now();
+	nano_type diff = end - start;
+	e.seed(diff.count());
+	return Company[u(e)];
+}
+
+string AirlineCreator::AirplaneCreator() {
 	//temp
 	vector<string>company(27);
 
 	string Company;
 	default_random_engine e;
-	uniform_int_distribution<unsigned> u(0,26);
+	uniform_int_distribution<unsigned> u(0, 26);
 	auto end = high_resolution_clock::now();
 	end = high_resolution_clock::now();
 	nano_type diff = end - start;

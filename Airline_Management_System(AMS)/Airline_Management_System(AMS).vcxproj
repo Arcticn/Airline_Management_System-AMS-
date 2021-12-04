@@ -150,6 +150,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Passenger.cpp" />
     <ClCompile Include="SuperUserInterface.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="Weather.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Passenger.h" />
     <ClInclude Include="SuperUserInterface.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="Weather.h" />
   </ItemGroup>
