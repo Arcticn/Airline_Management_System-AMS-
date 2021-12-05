@@ -3,6 +3,7 @@
 
 void TicketOrder() {
 	system("cls");
+	AirlineInfo info;
 	string Departure, Destination;
 	cout << "请输入您的出发省份：";
 	cin >> Departure;
@@ -29,8 +30,7 @@ void TicketOrder() {
 	int choice2;
 	cout << "请输入您的目的机场：";
 	cin >> choice2;
-	//
-	//if(Airline.Search(choice1,choice2)==1)
+	info.SearchLine()
 }
 
 void AirlineSearch() {

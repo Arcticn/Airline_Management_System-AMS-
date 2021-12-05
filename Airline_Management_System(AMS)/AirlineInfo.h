@@ -14,9 +14,11 @@ public:
     //    Time DestinationTime;  添加回来时记得改构造函数 ,DepartureTime(depa),DestinationTime(desti)
     int Maxpassenger;
     int RemainTickets;
-    vector<string>SearchLine(string depart, string desti);
+    vector<string> SearchLine(string depart, string desti);
+    vector<string> SearchIndirectLine(string depart, string desti);
     string SearchDepart(string LineNo);
     string SearchDesti(string LinNo);
+    
 private:
     unordered_map<string, string>Bookedlist;
     //queue<Passenger>Inqueuelist;
