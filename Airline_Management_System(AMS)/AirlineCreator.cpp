@@ -1,4 +1,16 @@
 #include "AMS.h"
+bool operator<(const tm &lhs, const tm &rhs) {
+	if (lhs.tm_wday < rhs.tm_wday)return true;
+	else if (lhs.tm_wday > rhs.tm_wday)return false;
+
+	if (lhs.tm_hour < rhs.tm_hour)return true;
+	else if (lhs.tm_hour > rhs.tm_hour)return false;
+
+	if (lhs.tm_min < rhs.tm_min)return true;
+	else if (lhs.tm_min > rhs.tm_min)return false;
+
+	return false;
+}//strict weak ordering
 
 void AirlineCreator::Creator() {
 	for (size_t i = 0, length = AirportDatabase.size(); i < length; i++)
@@ -20,9 +32,32 @@ void AirlineCreator::Creator() {
 			int diff = static_cast<int>(distance / AirplaneDatabase[planeid].Speed*60);
 			DesTime.tm_min += diff;
 			DesTime.tm_hour += (DesTime.tm_min / 60);
+			while (DesTime.tm_hour >= 24) {
+				DesTime.tm_wday += 1;
+				DesTime.tm_hour -= 24;
+			}
 			DesTime.tm_min %= 60;
 			AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(), AirportDatabase[i].AirportName, AirportDatabase[Destination[j]].AirportName, AirplaneDatabase[planeid].Model, DepTime,DesTime, AirplaneDatabase[planeid].Maxpassenger));
 		}
+	}
+	sort(AirlineInfoDatabase.begin(), AirlineInfoDatabase.end(), [](const AirlineInfo &a1, const AirlineInfo &a2) {return a1.DepartureTime < a2.DepartureTime; });
+	return;
+}
+
+void AirlineCreator::TicketDestroyer()
+{
+	auto end = high_resolution_clock::now();
+	
+	default_random_engine e;
+	nano_type diff = end - start;
+	uniform_int_distribution<unsigned> u(0, static_cast<int>(AirlineInfoDatabase.size()-1));
+	while (true) {
+		end = high_resolution_clock::now();
+		diff = end - start;
+		e.seed(diff.count());
+
+		this_thread::sleep_for(chrono::nanoseconds(3));
+		
 	}
 	return;
 }

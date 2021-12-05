@@ -101,10 +101,10 @@
     <ClInclude Include="Passenger.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
+    <ClInclude Include="QuickUse.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="QuickUse.h">
+    <ClInclude Include="Time.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
