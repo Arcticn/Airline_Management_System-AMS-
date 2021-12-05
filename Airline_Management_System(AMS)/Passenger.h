@@ -5,6 +5,7 @@ public:
     Passenger();
     ~Passenger();
     string name;
+    int id;
 private:
 
 };

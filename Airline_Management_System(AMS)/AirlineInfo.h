@@ -15,7 +15,7 @@ public:
     int Maxpassenger;
     int RemainTickets;
     vector<string> SearchLine(string depart, string desti);
-    vector<string> SearchIndirectLine(string depart, string desti);
+    vector<vector<string>> SearchIndirectLine(string depart, string desti);
     string SearchDepart(string LineNo);
     string SearchDesti(string LinNo);
     

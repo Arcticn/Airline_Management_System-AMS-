@@ -7,25 +7,27 @@ vector<string> AirlineInfo::SearchLine(string depart, string desti)
 		if (c.Destination == desti)
 			if (c.Departure == depart)
 				ans.emplace_back(c.LineNo);
-		return ans;
 	}
+	return ans;
 }
 
-vector<string> AirlineInfo::SearchIndirectLine(string depart, string desti)
+vector<vector<string>> AirlineInfo::SearchIndirectLine(string depart, string desti)
 {
-	vector<string>ans, temp;
+	vector<string> first;
+	vector<vector<string>>ans;
+	vector<string>temp;
 	for (auto c : AirlineInfoDatabase) {
 		if (c.Departure == depart && c.Destination != desti)
-			temp.emplace_back(c.LineNo);
+			first.emplace_back(c.LineNo);
 	}
-	for (auto c : temp) {
+	for (auto c : first) {
 		string t = SearchDesti(c);
 		vector<string>tt(SearchLine(t, desti));
 		for (auto d : tt) {
-			string e = c;
-			e += " ";
-			e += d;
-			ans.emplace_back(e);
+			temp.clear();
+			temp.emplace_back(c);
+			temp.emplace_back(d);
+			ans.emplace_back(temp);
 		}
 	}
 	return ans;
@@ -43,7 +45,7 @@ string AirlineInfo::SearchDepart(string LineNo)
 	return ans;
 }
 
-string AirlineInfo::SearchDesti(string LinNo)
+string AirlineInfo::SearchDesti(string LineNo)
 {
 	string ans;
 	for (auto c : AirlineInfoDatabase) {
