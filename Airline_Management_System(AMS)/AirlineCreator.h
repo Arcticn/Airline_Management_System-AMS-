@@ -9,6 +9,7 @@ public:
 private:
 	string LineNoCreator();
 	string CompanyCreator();
+	tm TimeCreator();
 	int AirplaneCreator(); //об╠Й
 	vector<int>DestinationCreator(int depart, int number);
 };

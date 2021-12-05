@@ -43,8 +43,8 @@ void TicketOrder() {
 	for (size_t i = 0,length=indirectLine.size(); i < length; i++)
 	{
 		cout << n++ << "、" << endl;
-		cout << indirectLine[i][0] << " " << info.SearchDepart(indirectLine[i][0]) << " " << info.SearchDesti(indirectLine[i][0]) << " " << endl;
-		cout << indirectLine[i][1] << " " << info.SearchDepart(indirectLine[i][1]) << " " << info.SearchDesti(indirectLine[i][1]) << " " << endl;
+		cout << indirectLine[i][0] << " " << info.SearchDepart(indirectLine[i][0]) << " " << info.SearchDesti(indirectLine[i][0]) << "(中转) " << endl;
+		cout << indirectLine[i][1] << " " << info.SearchDepart(indirectLine[i][1]) << "(中转) " << info.SearchDesti(indirectLine[i][1]) << " " << endl;
 	}
 	cout << "请输入您的选择：";
 	int choice3;

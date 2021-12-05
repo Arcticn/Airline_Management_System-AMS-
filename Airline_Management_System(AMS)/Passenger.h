@@ -1,11 +1,13 @@
 #pragma once
+
 class Passenger
 {
 public:
-    Passenger();
-    ~Passenger();
-    string name;
-    int id;
+    Passenger()=default;
+    Passenger(int id,string name,vector<string>ticket):
+        Id(id),Name(name),Ticket(ticket) {}
+    int Id;
+    string Name;
 private:
-
+    vector<string>Ticket;
 };

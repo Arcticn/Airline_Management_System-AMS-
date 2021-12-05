@@ -2,8 +2,9 @@
 
 int main()
 {
-    File file;file.Read();
-    Menu menu;
+    File file = File();
+    file.Read();
+    Menu menu = Menu();
     AirlineCreator airlinecreator;airlinecreator.Creator();
     while (true) {
         if(!menu.StartMenu())break;

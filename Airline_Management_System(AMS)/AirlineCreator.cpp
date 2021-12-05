@@ -7,10 +7,21 @@ void AirlineCreator::Creator() {
 		for (size_t j = 0; j < 30; j++)
 		{
 			int planeid = AirplaneCreator();
-			while (AirplaneDatabase[planeid].MaxRange < DistanceCalc(AirportDatabase[i].Latitude, AirportDatabase[i].Longitude, AirportDatabase[Destination[j]].Latitude, AirportDatabase[Destination[j]].Longitude)) {
+			//Calculate the distance
+			double distance = DistanceCalc(AirportDatabase[i].Latitude, AirportDatabase[i].Longitude, AirportDatabase[Destination[j]].Latitude, AirportDatabase[Destination[j]].Longitude);
+			//Ensure the Maxrange is enough
+			while (AirplaneDatabase[planeid].MaxRange < distance) {
 				planeid = AirplaneCreator();
+				double distance = DistanceCalc(AirportDatabase[i].Latitude, AirportDatabase[i].Longitude, AirportDatabase[Destination[j]].Latitude, AirportDatabase[Destination[j]].Longitude);
 			}
-			AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(), AirportDatabase[i].AirportName, AirportDatabase[Destination[j]].AirportName, AirplaneDatabase[planeid].Model, AirplaneDatabase[planeid].Maxpassenger));
+			//Calculate the ESTdestinationTime
+			tm DepTime = TimeCreator();
+			tm DesTime = DepTime;
+			int diff = static_cast<int>(distance / AirplaneDatabase[planeid].Speed*60);
+			DesTime.tm_min += diff;
+			DesTime.tm_hour += (DesTime.tm_min / 60);
+			DesTime.tm_min %= 60;
+			AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(), AirportDatabase[i].AirportName, AirportDatabase[Destination[j]].AirportName, AirplaneDatabase[planeid].Model, DepTime,DesTime, AirplaneDatabase[planeid].Maxpassenger));
 		}
 	}
 	return;
@@ -21,11 +32,12 @@ string AirlineCreator::LineNoCreator() {
 	auto end = high_resolution_clock::now();
 	string LineNo;
 	default_random_engine e;
+	nano_type diff = end - start;
 	uniform_int_distribution<unsigned> u(65, 90);
 	for (size_t i = 0; i < 2; i++)
 	{
 		end = high_resolution_clock::now();
-		nano_type diff = end - start;
+		diff = end - start;
 		e.seed(diff.count());
 		this_thread::sleep_for(chrono::nanoseconds(3));
 		char temp = u(e);
@@ -35,7 +47,7 @@ string AirlineCreator::LineNoCreator() {
 	for (size_t i = 0; i < 4; i++)
 	{
 		end = high_resolution_clock::now();
-		nano_type diff = end - start;
+		diff = end - start;
 		e.seed(diff.count());
 		this_thread::sleep_for(chrono::nanoseconds(3));
 		LineNo += to_string(u1(e));
@@ -50,6 +62,23 @@ string AirlineCreator::CompanyCreator() {
 	nano_type diff = end - start;
 	e.seed(diff.count());
 	return Company[u(e)];
+}
+
+tm AirlineCreator::TimeCreator()
+{
+	tm timeinfo = tm();
+	default_random_engine e;
+	uniform_int_distribution<unsigned> u1(0, 23);
+	auto end = high_resolution_clock::now();
+	nano_type diff = end - start;
+	e.seed(diff.count());
+	timeinfo.tm_hour = u1(e);
+	uniform_int_distribution<unsigned> u2(0, 59);
+	end = high_resolution_clock::now();
+	diff = end - start;
+	e.seed(diff.count());
+	timeinfo.tm_min = u2(e);
+	return timeinfo;
 }
 
 int AirlineCreator::AirplaneCreator() {
@@ -67,10 +96,11 @@ vector<int> AirlineCreator::DestinationCreator(int depart, int number) {
 	default_random_engine e;
 	auto end = high_resolution_clock::now();
 	uniform_int_distribution<unsigned> u(0, static_cast<int>(AirportDatabase.size()) - 1);
+	nano_type diff = end - start;
 	int cnt = 0, ran = 0;
 	while (cnt != number) {
 		end = high_resolution_clock::now();
-		nano_type diff = end - start;
+		diff = end - start;
 		e.seed(diff.count());
 		ran = u(e);
 		if (!DesId.count(ran)) {
@@ -80,3 +110,5 @@ vector<int> AirlineCreator::DestinationCreator(int depart, int number) {
 	}
 	return Destination;
 }
+
+

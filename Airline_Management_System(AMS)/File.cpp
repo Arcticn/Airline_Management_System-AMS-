@@ -4,6 +4,7 @@ vector<string>Company;
 vector<Airplane>AirplaneDatabase;
 vector<Airport>AirportDatabase;
 vector<AirlineInfo>AirlineInfoDatabase;
+unordered_map<string, int>PassengerQuickFind;
 
 void File::Read() {
 	ReadCompany();
