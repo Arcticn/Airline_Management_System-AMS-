@@ -13,6 +13,7 @@ bool operator<(const tm &lhs, const tm &rhs) {
 }//strict weak ordering
 
 void AirlineCreator::Creator() {
+	int number = 0;
 	for (size_t i = 0, length = AirportDatabase.size(); i < length; i++)
 	{
 		vector<int>Destination(DestinationCreator(static_cast<int>(i), 30));
@@ -29,7 +30,7 @@ void AirlineCreator::Creator() {
 			//Calculate the ESTdestinationTime
 			tm DepTime = TimeCreator();
 			tm DesTime = DepTime;
-			int diff = static_cast<int>(distance / AirplaneDatabase[planeid].Speed*60);
+			int diff = static_cast<int>(distance / AirplaneDatabase[planeid].Speed * 60);
 			DesTime.tm_min += diff;
 			DesTime.tm_hour += (DesTime.tm_min / 60);
 			while (DesTime.tm_hour >= 24) {
@@ -37,10 +38,24 @@ void AirlineCreator::Creator() {
 				DesTime.tm_hour -= 24;
 			}
 			DesTime.tm_min %= 60;
-			AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), LineNoCreator(), AirportDatabase[i].AirportName, AirportDatabase[Destination[j]].AirportName, AirplaneDatabase[planeid].Model, DepTime,DesTime, AirplaneDatabase[planeid].Maxpassenger));
+			//LineNo HashMap Insert For Quick Use
+			string Line = LineNoCreator();
+			if (LineQuickFind.insert({ Line,number }).second) {
+				AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), Line, AirportDatabase[i].AirportName, AirportDatabase[Destination[j]].AirportName, AirplaneDatabase[planeid].Model, DepTime, DesTime, AirplaneDatabase[planeid].Maxpassenger));
+				++number;
+			}
 		}
 	}
+	cout << "?";
+	LineQuickFind.clear(); number = 0;
 	sort(AirlineInfoDatabase.begin(), AirlineInfoDatabase.end(), [](const AirlineInfo &a1, const AirlineInfo &a2) {return a1.DepartureTime < a2.DepartureTime; });
+	cout << "/";
+	for (auto c : AirlineInfoDatabase) {
+		LineQuickFind.insert({ c.LineNo,number++ });
+	}
+	cout << ".";
+	PassengerCreator();
+	cout << 1;
 	return;
 }
 
@@ -50,7 +65,8 @@ void AirlineCreator::TicketDestroyer()
 	
 	default_random_engine e;
 	nano_type diff = end - start;
-	uniform_int_distribution<unsigned> u(0, static_cast<int>(AirlineInfoDatabase.size()-1));
+	uniform_int_distribution<unsigned> u1(0, static_cast<int>(AirlineInfoDatabase.size()-1));
+	uniform_int_distribution<unsigned> u2(0, 1000000-1);
 	while (true) {
 		end = high_resolution_clock::now();
 		diff = end - start;
@@ -144,6 +160,14 @@ vector<int> AirlineCreator::DestinationCreator(int depart, int number) {
 		}
 	}
 	return Destination;
+}
+
+void AirlineCreator::PassengerCreator()
+{
+	for (size_t i = 0; i < 1000000; i++)
+	{
+		PassengerDatabase.insert({ i, Passenger(i) });
+	}
 }
 
 

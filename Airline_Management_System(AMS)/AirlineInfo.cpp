@@ -35,24 +35,10 @@ vector<vector<string>> AirlineInfo::SearchIndirectLine(string depart, string des
 
 string AirlineInfo::SearchDepart(string LineNo)
 {
-	string ans;
-	for (auto c : AirlineInfoDatabase) {
-		if (c.LineNo == LineNo) {
-			ans = c.Departure;
-			break;
-		}
-	}
-	return ans;
+	return AirlineInfoDatabase[LineQuickFind[LineNo]].Departure;
 }
 
 string AirlineInfo::SearchDesti(string LineNo)
 {
-	string ans;
-	for (auto c : AirlineInfoDatabase) {
-		if (c.LineNo == LineNo) {
-			ans = c.Destination;
-			break;
-		}
-	}
-	return ans;
+	return AirlineInfoDatabase[LineQuickFind[LineNo]].Destination;
 }

@@ -3,11 +3,13 @@
 class Passenger
 {
 public:
-    Passenger()=default;
-    Passenger(int id,string name,vector<string>ticket):
-        Id(id),Name(name),Ticket(ticket) {}
+    Passenger() = default;
+    Passenger(int id, vector<string>ticket) :
+        Id(id), Ticket(ticket) {}
+    Passenger(int id) :
+        Id(id) {}
+protected:
     int Id;
-    string Name;
 private:
     vector<string>Ticket;
 };
