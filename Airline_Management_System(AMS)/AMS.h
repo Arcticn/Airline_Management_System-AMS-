@@ -15,6 +15,7 @@
 #include "Weather.h"
 #include "File.h"
 #include "QuickUse.h"
+#include "Ticket.h"
 
 extern vector<string>Company;
 extern vector<Airplane>AirplaneDatabase;

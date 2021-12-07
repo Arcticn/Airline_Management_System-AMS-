@@ -46,14 +46,11 @@ void AirlineCreator::Creator() {
 			}
 		}
 	}
-	cout << "?";
 	LineQuickFind.clear(); number = 0;
 	sort(AirlineInfoDatabase.begin(), AirlineInfoDatabase.end(), [](const AirlineInfo &a1, const AirlineInfo &a2) {return a1.DepartureTime < a2.DepartureTime; });
-	cout << "/";
 	for (auto c : AirlineInfoDatabase) {
 		LineQuickFind.insert({ c.LineNo,number++ });
 	}
-	cout << ".";
 	PassengerCreator();
 	cout << 1;
 	return;
@@ -164,7 +161,7 @@ vector<int> AirlineCreator::DestinationCreator(int depart, int number) {
 
 void AirlineCreator::PassengerCreator()
 {
-	for (size_t i = 0; i < 1000000; i++)
+	for (size_t i = 0; i < 100000; i++)
 	{
 		PassengerDatabase.insert({ i, Passenger(i) });
 	}

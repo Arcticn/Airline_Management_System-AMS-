@@ -57,6 +57,9 @@
     <ClCompile Include="Time.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Ticket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AMS.h">
@@ -105,6 +108,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Ticket.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
