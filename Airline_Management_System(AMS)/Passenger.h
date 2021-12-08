@@ -8,8 +8,7 @@ public:
         Id(id), Ticket(ticket) {}
     Passenger(int id) :
         Id(id) {}
-protected:
     int Id;
-private:
+protected:
     vector<string>Ticket;
 };

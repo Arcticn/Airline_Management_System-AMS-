@@ -6,6 +6,7 @@ vector<Airport>AirportDatabase;
 vector<AirlineInfo>AirlineInfoDatabase;
 unordered_map<string, int>LineQuickFind;
 unordered_map<int, Passenger>PassengerDatabase;
+unordered_map<string, vector<string>>PassengerTicket;
 
 void File::Read() {
 	ReadCompany();

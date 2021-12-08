@@ -18,8 +18,6 @@ public:
     vector<vector<string>> SearchIndirectLine(string depart, string desti);
     string SearchDepart(string LineNo);
     string SearchDesti(string LinNo);
-private:
-    //unordered_map<string, string>Bookedlist;
-    //queue<Passenger>Inqueuelist;
-
+    unordered_map<int, int>Bookedlist;
+    queue<int>Inqueuelist;
 };

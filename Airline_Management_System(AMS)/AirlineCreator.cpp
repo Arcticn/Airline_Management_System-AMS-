@@ -58,19 +58,19 @@ void AirlineCreator::Creator() {
 
 void AirlineCreator::TicketDestroyer()
 {
+	Ticket tic = Ticket();
 	auto end = high_resolution_clock::now();
-	
 	default_random_engine e;
 	nano_type diff = end - start;
 	uniform_int_distribution<unsigned> u1(0, static_cast<int>(AirlineInfoDatabase.size()-1));
 	uniform_int_distribution<unsigned> u2(0, 1000000-1);
+	normal_distribution<unsigned> u3(4,4);
 	while (true) {
 		end = high_resolution_clock::now();
 		diff = end - start;
 		e.seed(diff.count());
-
+		tic.Order(u2(e),AirlineInfoDatabase[u1(e)].LineNo,u3(e));
 		this_thread::sleep_for(chrono::nanoseconds(3));
-		
 	}
 	return;
 }
