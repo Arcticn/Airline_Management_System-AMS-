@@ -17,6 +17,7 @@
 #include "QuickUse.h"
 #include "Ticket.h"
 
+tm *CurTime;
 extern vector<string>Company;
 extern vector<Airplane>AirplaneDatabase;
 extern vector<Airport>AirportDatabase;

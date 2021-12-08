@@ -1,9 +1,9 @@
 #include "AMS.h"
 
 
-void TicketOrder() {
+void UserInterface::TicketOrder() {
 	system("cls");
-	AirlineInfo info;
+	AirlineInfo info = AirlineInfo();
 	string Departure, Destination;
 	cout << "请输入您的出发省份：";
 	cin >> Departure;
@@ -40,6 +40,7 @@ void TicketOrder() {
 	n = 1;
 	for (size_t i = 0, length = directLine.size(); i < length; i++)
 		cout << n++ << "、" <<'\n' << directLine[i] << " " << DEPA[choice1 - 1] << " " << DEST[choice2 - 1] << " " << endl;
+	int border = --n;
 	for (size_t i = 0,length=indirectLine.size(); i < length; i++)
 	{
 		cout << n++ << "、" << endl;
@@ -49,17 +50,21 @@ void TicketOrder() {
 	cout << "请输入您的选择：";
 	int choice3;
 	cin >> choice3;
+	Ticket tic = Ticket();
+	cout << "请输入您想要出发：";
+	tm date;
+	if (choice3 <= border)tic.Order(id, directLine[border - 1], date);
 }
 
-void AirlineSearch() {
+void UserInterface::AirlineSearch() {
 
 }
 
-void TicketDiscard() {
+void UserInterface::TicketDiscard() {
 
 }
 
-void ViewMyTicket() {
+void UserInterface::ViewMyTicket() {
 
 }
 
