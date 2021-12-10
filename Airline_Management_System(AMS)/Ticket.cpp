@@ -25,7 +25,7 @@ bool Ticket::Refund(Ticket ticket)
 	PassengerDatabase[ticket.Id].tickets.erase(it1);
 	auto it2 = find(AirlineInfoDatabase[LineQuickFind[ticket.LineNo]].Bookedlist.begin(), AirlineInfoDatabase[LineQuickFind[ticket.LineNo]].Bookedlist.end(), ticket.Id);
 	AirlineInfoDatabase[LineQuickFind[ticket.LineNo]].Bookedlist.erase(it2);
-	AirlineInfoDatabase[LineQuickFind[ticket.LineNo]].
+	AirlineInfoDatabase[LineQuickFind[ticket.LineNo]].QueueOut(ticket.date);
 	return false;
 }
 

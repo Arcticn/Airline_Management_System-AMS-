@@ -17,12 +17,15 @@ public:
     int Maxpassenger;
     int RemainTickets;
     vector<int>Bookedlist;
+    //vector<queue<int>>a;
+    queue<int>Inqueuelist;
 
+    virtual ~AirlineInfo() = default;
     vector<string> SearchLine(string depart, string desti);
     vector<vector<string>> SearchIndirectLine(string depart, string desti);
     string SearchDepart(string LineNo);
     string SearchDesti(string LinNo);
-    void QueueOut();
+    void QueueOut(int diffday);
 private:
-    queue<int>Inqueuelist;
+    
 };

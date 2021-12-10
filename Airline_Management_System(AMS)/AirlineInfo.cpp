@@ -43,7 +43,9 @@ string AirlineInfo::SearchDesti(string LineNo)
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].Destination;
 }
 
-void AirlineInfo::QueueOut()
+void AirlineInfo::QueueOut(int diffday)
 {
-
+	int id=Inqueuelist.front();
+	Ticket tic;
+	tic.Order(id, this->LineNo, 1, diffday, 1);
 }
