@@ -1,16 +1,4 @@
 #include "AMS.h"
-bool operator<(const tm &lhs, const tm &rhs) {
-	if (lhs.tm_wday < rhs.tm_wday)return true;
-	else if (lhs.tm_wday > rhs.tm_wday)return false;
-
-	if (lhs.tm_hour < rhs.tm_hour)return true;
-	else if (lhs.tm_hour > rhs.tm_hour)return false;
-
-	if (lhs.tm_min < rhs.tm_min)return true;
-	else if (lhs.tm_min > rhs.tm_min)return false;
-
-	return false;
-}//strict weak ordering
 
 void AirlineCreator::Creator() {
 	int number = 0;

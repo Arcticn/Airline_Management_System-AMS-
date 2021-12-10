@@ -15,6 +15,7 @@
 #include <fstream>
 #include <cmath>
 #include <ctime>
+#include <tuple>
 
 using namespace std;
 using namespace std::chrono;

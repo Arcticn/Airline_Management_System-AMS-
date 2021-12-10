@@ -16,9 +16,9 @@ public:
     tm estDestinationTime;
     int Maxpassenger;
     int RemainTickets;
-    vector<int>Bookedlist;
+    unordered_map<tm, vector<int>>Bookedlist; //tm, vector id
     //vector<queue<int>>a;
-    queue<int>Inqueuelist;
+    unordered_map<tm,queue<int>>Inqueuelist; //tm, queue id
 
     virtual ~AirlineInfo() = default;
     vector<string> SearchLine(string depart, string desti);

@@ -9,6 +9,5 @@ public:
     Passenger(int id) :
         Id(id) {}
     int Id;
-
     vector<Ticket>tickets;
 };
