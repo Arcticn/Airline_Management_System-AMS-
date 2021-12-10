@@ -16,6 +16,7 @@
 #include "File.h"
 #include "QuickUse.h"
 #include "Ticket.h"
+typedef std::chrono::duration<int, std::nano> nano_type;
 
 tm *CurTime;
 extern vector<string>Company;

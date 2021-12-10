@@ -3,21 +3,26 @@ class AirlineInfo
 {
 public:
     AirlineInfo() = default;
-    AirlineInfo(const string &comp, const string &line, const string &dep, const string &dest, const string &airp, tm deptime,tm destime,int maxp) :
-        Company(comp), LineNo(line), Departure(dep), Destination(dest), Airplane(airp),DepartureTime(deptime), estDestinationTime(destime), Maxpassenger(maxp), RemainTickets(maxp) {}
+    AirlineInfo(const string &comp, const string &line, const string &dep, const string &dest, const string &airp, tm deptime, tm destime, int maxp) :
+        Company(comp), LineNo(line), Departure(dep), Destination(dest), Airplane(airp), DepartureTime(deptime), estDestinationTime(destime), Maxpassenger(maxp), RemainTickets(maxp) {}
+    AirlineInfo(const string &line) :
+        LineNo(line) {}
     string Company;
     string LineNo;
     string Departure;
     string Destination;
     string Airplane;
-    tm DepartureTime;                         
+    tm DepartureTime;
     tm estDestinationTime;
     int Maxpassenger;
     int RemainTickets;
+    vector<int>Bookedlist;
+
     vector<string> SearchLine(string depart, string desti);
     vector<vector<string>> SearchIndirectLine(string depart, string desti);
     string SearchDepart(string LineNo);
     string SearchDesti(string LinNo);
-    unordered_map<int, int>Bookedlist;
+    void QueueOut();
+private:
     queue<int>Inqueuelist;
 };

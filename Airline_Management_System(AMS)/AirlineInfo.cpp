@@ -42,3 +42,8 @@ string AirlineInfo::SearchDesti(string LineNo)
 {
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].Destination;
 }
+
+void AirlineInfo::QueueOut()
+{
+
+}

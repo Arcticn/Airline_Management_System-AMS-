@@ -65,6 +65,7 @@ outport:return;
 }
 
 void Menu::SuperUserMenu() {
+    UserInterface ui = UserInterface();
     while (true) {
         system("cls");
         cout << "1¡¢¶©Æ±" << '\n';
@@ -77,16 +78,16 @@ void Menu::SuperUserMenu() {
         switch (n)
         {
         case 1:
-            TicketOrder();
+            ui.TicketOrder();
             break;
         case 2:
-            AirlineSearch();
+            ui.AirlineSearch();
             break;
         case 3:
-            TicketDiscard();
+            ui.TicketDiscard();
             break;
         case 4:
-            ViewMyTicket();
+            ui.ViewMyTicket();
             break;
         case 0:
             goto outport;
