@@ -18,7 +18,7 @@ int main()
     file.Read();
     airlinecreator.Creator();
     thread(SyncTime).detach();
-    //thread(&AirlineCreator::TicketDestroyer, ref(airlinecreator)).detach();
+    //thread(&AirlineCreator::TicketCreator, ref(airlinecreator)).detach();
     while (true) {
         if(!menu.StartMenu())break;
     }

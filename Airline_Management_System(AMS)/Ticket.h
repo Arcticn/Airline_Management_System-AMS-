@@ -8,11 +8,12 @@ public:
 	std::chrono::high_resolution_clock::time_point start = high_resolution_clock::now();
 	Ticket() = default;
 	Ticket(int Id,string LineNo,tm* date,tm tdate):
-		Passenger(Id),AirlineInfo(LineNo), date(date),truedate(tdate), tichash(TicketHash()) {}
-	tm* date;  //购票时间
-	tm truedate;  //起飞时间
-	size_t tichash;
-	bool Order(int id,string LineNo,int number,int diffday, bool ifqueue);
+		Passenger(Id),AirlineInfo(LineNo), Date(date),FlightDate(tdate), TicketNo(TicketHash()) {}
+	tm* Date;  //购票时间
+	tm FlightDate;  //起飞时间
+	size_t TicketNo;
+	bool Order(int id,string LineNo,int amount,int diffday, bool ifqueue);
+	bool Order(int id, string LineNo, int amount, tm date/*起飞时间*/, bool ifqueue);
 	bool Refund(Ticket ticket);
 	size_t TicketHash();
 };

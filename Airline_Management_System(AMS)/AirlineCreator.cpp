@@ -29,7 +29,7 @@ void AirlineCreator::Creator() {
 			//LineNo HashMap Insert For Quick Use
 			string Line = LineNoCreator();
 			if (LineQuickFind.insert({ Line,number }).second) {
-				AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), Line, AirportDatabase[i].AirportName, AirportDatabase[Destination[j]].AirportName, AirplaneDatabase[planeid].Model, DepTime, DesTime, AirplaneDatabase[planeid].Maxpassenger));
+				AirlineInfoDatabase.emplace_back(AirlineInfo(CompanyCreator(), Line, AirportDatabase[i].AirportName, AirportDatabase[Destination[j]].AirportName, AirplaneDatabase[planeid].Model,distance, DepTime, DesTime, AirplaneDatabase[planeid].Maxpassenger));
 				++number;
 			}
 		}
@@ -44,7 +44,7 @@ void AirlineCreator::Creator() {
 	return;
 }
 
-void AirlineCreator::TicketDestroyer()
+void AirlineCreator::TicketCreator()
 {
 	Ticket tic = Ticket();
 	auto end = high_resolution_clock::now();
