@@ -1,3 +1,10 @@
 #pragma once
-void SuperTicketOrder();
-void SuperTicketDiscard();
+struct SuperUserInterface {
+public:
+	SuperUserInterface() = default;
+	void SuperTicketOrder();
+	void SuperAirlineSearch(UserInterface u);
+	void SuperTicketDiscard();
+	void SuperViewTicket();
+private:
+};

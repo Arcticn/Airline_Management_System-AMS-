@@ -16,12 +16,18 @@ void RefreshLine()
 	int day = 0;
 	while (true) {
 		if (day != CurTime.tm_mday) {
-			tm 
-			for (auto a : AirlineInfoDatabase) {
-				a.RemainTickets.insert({});
+			tm temp = CurTime;
+			for (size_t i = 0; i <= 15; i++)
+			{
+				string date = to_string(temp.tm_year) + to_string(temp.tm_mon) + to_string(temp.tm_mday);
+				for (auto &a : AirlineInfoDatabase) {
+					a.RemainTickets.insert({date,a.Maxpassenger});
+				}
+				temp += 1;
 			}
 			day = CurTime.tm_mday;
 		}
+		this_thread::sleep_for(chrono::seconds(10));
 	}
 	return;
 }
@@ -39,7 +45,7 @@ bool operator<(const tm &lhs, const tm &rhs) {
 	return false;
 }//strict weak ordering
 
-tm &operator+=(const tm &lhs,int rhs)
+tm& operator+=(const tm &lhs,int rhs)
 {
 	tm temp=lhs;
 	time_t t= mktime(&temp);
@@ -47,13 +53,14 @@ tm &operator+=(const tm &lhs,int rhs)
 	days_type day(rhs);
 	tp = tp + day;
 	auto tt = system_clock::to_time_t(tp);
-	tm ttt;
+	tm ttt={0};
 	localtime_s(&ttt,&tt);
-	tm ans={0};
-	ans.tm_year = ttt.tm_year;
-	ans.tm_mon = ttt.tm_mon;
-	ans.tm_mday = ttt.tm_mday;
-	return ans;
+	tm a = { 0 };
+	tm* ans = &a;
+	ans->tm_year = ttt.tm_year;
+	ans->tm_mon = ttt.tm_mon;
+	ans->tm_mday = ttt.tm_mday;
+	return *ans;
 }
 
 int operator-(tm &lhs, tm &rhs)

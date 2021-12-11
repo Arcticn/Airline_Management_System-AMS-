@@ -51,14 +51,14 @@ void AirlineCreator::TicketCreator()
 	default_random_engine e;
 	nano_type diff = end - start;
 	uniform_int_distribution<unsigned> u1(0, static_cast<int>(AirlineInfoDatabase.size()-1));
-	uniform_int_distribution<unsigned> u2(0, 1000000-1);
+	uniform_int_distribution<unsigned> u2(0, 100000-1);
 	gamma_distribution<double> u3(1.0, 5.0);
 	while (true) {
 		end = high_resolution_clock::now();
 		diff = end - start;
 		e.seed(diff.count());
 		tic.Order(u2(e),AirlineInfoDatabase[u1(e)].LineNo,1,floor(u3(e)),1);
-		this_thread::sleep_for(chrono::nanoseconds(3));
+		this_thread::sleep_for(chrono::nanoseconds(300));
 	}
 	return;
 }

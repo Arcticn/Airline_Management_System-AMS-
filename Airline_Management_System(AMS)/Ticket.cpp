@@ -10,7 +10,7 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Calc date
 	if (diffday > 15)return false;
-	tm temp;
+	tm temp={0};
 	temp.tm_year = CurTime.tm_year;
 	temp.tm_mon = CurTime.tm_mon;
 	temp.tm_mday = CurTime.tm_mday;
@@ -65,15 +65,14 @@ bool Ticket::Order(int Id, string LineNo, int amount, string date, bool ifqueue)
 
 bool Ticket::Refund(Ticket ticket)
 {
-
 	auto &line = AirlineInfoDatabase[LineQuickFind[ticket.LineNo]];
 	auto it1 = find(PassengerDatabase[ticket.Id].tickets.begin(), PassengerDatabase[ticket.Id].tickets.end(), ticket);
 	PassengerDatabase[ticket.Id].tickets.erase(it1);
-	auto it2 = find(line.Bookedlist[&ticket.FlightDate].begin(), line.Bookedlist[&ticket.FlightDate].end(), ticket.Id);
+	auto it2 = find(line.Bookedlist[ticket.FlightDate].begin(), line.Bookedlist[ticket.FlightDate].end(), ticket.Id);
 	line.Bookedlist[ticket.FlightDate].erase(it2);
-	if (line.Inqueuelist[ticket.FlightDate].empty()) line.RemainTickets[&ticket.FlightDate] += 1;
+	if (line.Inqueuelist[ticket.FlightDate].empty()) line.RemainTickets[ticket.FlightDate] += 1;
 	else line.QueueOut(ticket.FlightDate);
-	return false;
+	return true;
 }
 
 size_t Ticket::TicketHash()
