@@ -23,7 +23,7 @@ void RefreshLine()
 				for (auto &a : AirlineInfoDatabase) {
 					a.RemainTickets.insert({date,a.Maxpassenger});
 				}
-				temp += 1;
+				temp =temp+ 1;
 			}
 			day = CurTime.tm_mday;
 		}
@@ -45,7 +45,23 @@ bool operator<(const tm &lhs, const tm &rhs) {
 	return false;
 }//strict weak ordering
 
-tm& operator+=(const tm &lhs,int rhs)
+tm operator+(tm &lhs, int rhs)
+{
+	time_t t = mktime(&lhs);
+	auto tp = system_clock::from_time_t(t);
+	days_type day(rhs);
+	tp = tp + day;
+	auto tt = system_clock::to_time_t(tp);
+	tm ttt = { 0 };
+	localtime_s(&ttt, &tt);
+	tm ans={0};
+	ans.tm_year = ttt.tm_year;
+	ans.tm_mon = ttt.tm_mon;
+	ans.tm_mday = ttt.tm_mday;
+	return ans;
+}
+
+/*tm &operator+=(int rhs)
 {
 	tm temp=lhs;
 	time_t t= mktime(&temp);
@@ -60,9 +76,9 @@ tm& operator+=(const tm &lhs,int rhs)
 	ans->tm_year = ttt.tm_year;
 	ans->tm_mon = ttt.tm_mon;
 	ans->tm_mday = ttt.tm_mday;
-	return *ans;
+	return *this;
 }
-
+*/
 int operator-(tm &lhs, tm &rhs)
 {
 	time_t templ = mktime(&lhs);

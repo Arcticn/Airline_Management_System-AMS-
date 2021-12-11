@@ -28,7 +28,6 @@ void AirlineBoard::depart(int ap)
 	}
 	AirlineInfo info;
 	sort(Line.begin(), Line.end(), [&info](const string &s1, const string &s2) {return info.SearchDesTime(s1) < info.SearchDesTime(s2); });
-	int n;
 	cout << "机号" << '\t' << left << setw(20) << "抵达机场" << '\t' << "出发时间" << '\t' << "预计到达时间" << endl;
 	for (auto &c : Line) {
 		char buffer1[10], buffer2[10];
@@ -54,7 +53,6 @@ void AirlineBoard::desti(int ap)
 	}
 	AirlineInfo info;
 	sort(Line.begin(), Line.end(), [&info](const string &s1, const string &s2) {return info.SearchDeparTime(s1) < info.SearchDeparTime(s2); });
-	int n;
 	cout << "机号" << '\t' << left << setw(20) << "抵达机场" << '\t' << "出发时间" << '\t' << "预计到达时间" << endl;
 	for (auto &c : Line) {
 		char buffer1[10], buffer2[10];
