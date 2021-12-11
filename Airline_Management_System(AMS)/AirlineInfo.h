@@ -12,10 +12,10 @@ public:
     string Departure;
     string Destination;
     string Airplane;
-    double Distance;
-    tm DepartureTime;
-    tm estDestinationTime;
-    int Maxpassenger;
+    double Distance=0;
+    tm DepartureTime={0};
+    tm estDestinationTime={0};
+    int Maxpassenger=0;
     tm* temp = { 0 };
     unordered_map<tm*, int> RemainTickets = { {temp,{}} };
     unordered_map<tm*, vector<int>>Bookedlist = { {temp,{}} }; //tm, vector id

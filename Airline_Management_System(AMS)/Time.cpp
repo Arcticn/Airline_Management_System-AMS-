@@ -1,23 +1,14 @@
 #include "AMS.h"
 
-tm CurDate;
-tm *CurTime;
-time_t rawtime;
+tm CurDate={0};
+tm CurTime={0};
+time_t rawtime{};
 
 void SyncTime() {
 	while (true) {
 		time(&rawtime);
-		localtime_s(CurTime,&rawtime);
+		localtime_s(&CurTime, &rawtime);
 		this_thread::sleep_for(chrono::seconds(3));
-	}
-}
-
-void SyncDate() {
-	while (true) {
-		CurDate.tm_year = CurTime->tm_year;
-		CurDate.tm_mon = CurTime->tm_mon;
-		CurDate.tm_mday = CurTime->tm_mday;
-		this_thread::sleep_for(chrono::seconds(10));
 	}
 }
 
@@ -42,12 +33,12 @@ tm &operator+=(const tm &lhs,int rhs)
 	days_type day(rhs);
 	tp = tp + day;
 	auto tt = system_clock::to_time_t(tp);
-	tm *ttt{};
-	localtime_s(ttt,&tt);
+	tm ttt;
+	localtime_s(&ttt,&tt);
 	tm ans;
-	ans.tm_year = ttt->tm_year;
-	ans.tm_mon = ttt->tm_mon;
-	ans.tm_mday = ttt->tm_mday;
+	ans.tm_year = ttt.tm_year;
+	ans.tm_mon = ttt.tm_mon;
+	ans.tm_mday = ttt.tm_mday;
 	return ans;
 }
 

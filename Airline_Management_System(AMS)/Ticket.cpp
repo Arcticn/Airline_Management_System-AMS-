@@ -2,7 +2,7 @@
 
 bool operator==(const Ticket &lhs, const Ticket &rhs)
 {
-	return lhs.TicketNo == rhs.TicketNo && lhs.Date == rhs.Date;
+	return lhs.TicketNo == rhs.TicketNo ;
 }
 
 bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
@@ -10,9 +10,9 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Calc date
 	tm date;
-	date.tm_year = CurTime->tm_year;
-	date.tm_mon = CurTime->tm_mon;
-	date.tm_mday = CurTime->tm_mday;
+	date.tm_year = CurTime.tm_year;
+	date.tm_mon = CurTime.tm_mon;
+	date.tm_mday = CurTime.tm_mday;
 	if (diffday > 15)return false;
 	date += diffday;
 	//Compare

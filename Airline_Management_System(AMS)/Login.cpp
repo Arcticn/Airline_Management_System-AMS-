@@ -1,6 +1,8 @@
 #include "AMS.h"
 
 int User_ID = 100000;
+map<string, string>Superuser = { { "admin","admin"} };
+unordered_map<string, string>User;
 
 void Login::UserRegister() {
     string username;

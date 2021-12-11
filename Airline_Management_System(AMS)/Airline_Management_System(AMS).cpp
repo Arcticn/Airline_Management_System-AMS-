@@ -1,4 +1,5 @@
-﻿#include "AMS.h"
+﻿
+#include "AMS.h"
 
 int main()
 {
@@ -9,8 +10,8 @@ int main()
     file.Read();
     airlinecreator.Creator();
     thread(SyncTime).detach();
-    thread(SyncDate).detach();
-    //thread(&AirlineCreator::TicketCreator, ref(airlinecreator)).detach();
+    this_thread::sleep_for(chrono::milliseconds(10));
+    thread(&AirlineCreator::TicketCreator, ref(airlinecreator)).detach();
     while (true) {
         if(!menu.StartMenu())break;
     }

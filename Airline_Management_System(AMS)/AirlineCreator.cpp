@@ -52,7 +52,7 @@ void AirlineCreator::TicketCreator()
 	nano_type diff = end - start;
 	uniform_int_distribution<unsigned> u1(0, static_cast<int>(AirlineInfoDatabase.size()-1));
 	uniform_int_distribution<unsigned> u2(0, 1000000-1);
-	gamma_distribution<double> u3(1.5, 5.0);
+	gamma_distribution<double> u3(1.0, 5.0);
 	while (true) {
 		end = high_resolution_clock::now();
 		diff = end - start;
@@ -151,9 +151,10 @@ void AirlineCreator::PassengerCreator()
 {
 	for (int i = 0; i < 100000; i++)
 	{
+		string t = to_string(i);
 		PassengerDatabase.insert({ i, Passenger(i) });//i, Passenger(i)
-		User.insert({ to_string(i),to_string(i) });
-		UserToID.insert({ to_string(i),i });
+		User.insert({ t,t});
+		UserToID.insert({ t,i });
 	}
 }
 
