@@ -29,8 +29,8 @@ bool Menu::StartMenu() {
     }
 }
 
-void Menu::UserMenu() {
-    UserInterface ui =UserInterface();
+void Menu::UserMenu(int uid) {
+    UserInterface ui =UserInterface(uid);
     while (true) {
         system("cls");
         cout << "1¡¢¶©Æ±" << '\n';
@@ -65,7 +65,7 @@ outport:return;
 }
 
 void Menu::SuperUserMenu() {
-    UserInterface ui = UserInterface();
+    UserInterface ui = UserInterface(1);
     while (true) {
         system("cls");
         cout << "1¡¢¶©Æ±" << '\n';

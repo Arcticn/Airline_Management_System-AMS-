@@ -3,7 +3,7 @@
 void SyncTime() {
 	while (true) {
 		time(&rawtime);
-		CurTime = localtime(&rawtime);
+		localtime_s(CurTime,&rawtime);
 		this_thread::sleep_for(chrono::seconds(3));
 	}
 }
@@ -39,7 +39,7 @@ tm &operator+=(const tm &lhs,int rhs)
 	tp = tp + day;
 	auto tt = system_clock::to_time_t(tp);
 	tm *ttt;
-	ttt = localtime(&tt);
+	localtime_s(ttt,&tt);
 	tm ans;
 	ans.tm_year = ttt->tm_year;
 	ans.tm_mon = ttt->tm_mon;

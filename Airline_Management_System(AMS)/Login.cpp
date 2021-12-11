@@ -19,6 +19,9 @@ void Login::UserRegister() {
     cin >> password;
     if (password == "0")goto outport;
     User.insert({ username,password });
+    PassengerDatabase.insert({ User_ID,Passenger(User_ID)});
+    UserToID.insert({ username,User_ID });
+    User_ID += 1;
     cout << '\n' << "注册成功！2秒后跳转回登陆界面";
     this_thread::sleep_for(chrono::seconds(2));
     system("cls");
@@ -95,7 +98,7 @@ void Login::UserLogin() {
         this_thread::sleep_for(chrono::seconds(2));
         system("cls");
         Menu menu;
-        menu.UserMenu();
+        menu.UserMenu(UserToID[username]);
     }
 outport:return;
 }

@@ -31,7 +31,7 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 	}
 }
 
-bool Ticket::Order(int id, string LineNo, int amount, tm date, bool ifqueue)
+bool Ticket::Order(int Id, string LineNo, int amount, tm date, bool ifqueue)
 {
 	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Compare
@@ -57,6 +57,7 @@ bool Ticket::Order(int id, string LineNo, int amount, tm date, bool ifqueue)
 
 bool Ticket::Refund(Ticket ticket)
 {
+
 	auto &line = AirlineInfoDatabase[LineQuickFind[ticket.LineNo]];
 	auto it1 = find(PassengerDatabase[ticket.Id].tickets.begin(), PassengerDatabase[ticket.Id].tickets.end(), ticket);
 	PassengerDatabase[ticket.Id].tickets.erase(it1);

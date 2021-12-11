@@ -152,6 +152,8 @@ void AirlineCreator::PassengerCreator()
 	for (size_t i = 0; i < 100000; i++)
 	{
 		PassengerDatabase.insert({ i, Passenger(i) });
+		User.insert({ to_string(i),to_string(i) });
+		UserToID.insert({ to_string(i),i });
 	}
 }
 

@@ -2,7 +2,7 @@
 
 struct Menu {
 	void SuperUserMenu();
-	void UserMenu();
+	void UserMenu(int uid);
 	bool StartMenu();
 private:
 };
