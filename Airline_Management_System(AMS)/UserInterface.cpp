@@ -15,6 +15,8 @@ void UserInterface::TicketOrder(int uid) {
 	cin >> Date.tm_mon;
 	cout << "日：";
 	cin >> Date.tm_mday;
+	Date.tm_year -= 1900;
+	Date.tm_mon -= 1;  //Sync with tm
 	int diffday = Date - CurTime;
 	string sDate = to_string(Date.tm_year) + to_string(Date.tm_mon) + to_string(Date.tm_mday);
 	cout << "请输入您的出发省份：";
@@ -156,7 +158,7 @@ void UserInterface::AirlineSearch() {
 }
 
 void UserInterface::TicketDiscard(int uid) {
-	ViewMyTicket();
+	ViewMyTicket(uid);
 	cout << "输入您想要退订的机票的编号：";
 	int choice;
 	cin >> choice;

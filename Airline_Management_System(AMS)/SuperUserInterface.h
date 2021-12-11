@@ -2,9 +2,9 @@
 struct SuperUserInterface {
 public:
 	SuperUserInterface() = default;
-	void SuperTicketOrder();
+	void SuperTicketOrder(UserInterface u);
 	void SuperAirlineSearch(UserInterface u);
-	void SuperTicketDiscard();
-	void SuperViewTicket();
+	void SuperTicketDiscard(UserInterface u);
+	void SuperViewTicket(UserInterface u);
 private:
 };

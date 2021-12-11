@@ -1,10 +1,11 @@
 #include "AMS.h"
 
-void SuperUserInterface::SuperTicketOrder()
+void SuperUserInterface::SuperTicketOrder(UserInterface u)
 {
 	cout << "请输入该用户的UID：";
 	int uid;
 	cin >> uid;
+	u.TicketOrder(uid);
 }
 
 void SuperUserInterface::SuperAirlineSearch(UserInterface u)
@@ -12,16 +13,18 @@ void SuperUserInterface::SuperAirlineSearch(UserInterface u)
 	u.AirlineSearch();
 }
 
-void SuperUserInterface::SuperTicketDiscard()
+void SuperUserInterface::SuperTicketDiscard(UserInterface u)
 {
 	cout << "请输入该用户的UID：";
 	int uid;
 	cin >> uid;
+	u.TicketDiscard(uid);
 }
 
-void SuperUserInterface::SuperViewTicket()
+void SuperUserInterface::SuperViewTicket(UserInterface u)
 {
 	cout << "请输入该用户的UID：";
 	int uid;
 	cin >> uid;
+	u.ViewMyTicket(uid);
 }

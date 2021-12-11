@@ -1,3 +1,8 @@
 #pragma once
-
-void AirlineBoard();
+class AirlineBoard {
+public:
+	void menu();
+private:
+	void depart(int n);
+	void desti(int n);
+};
