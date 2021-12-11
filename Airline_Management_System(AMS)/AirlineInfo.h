@@ -16,18 +16,17 @@ public:
     tm DepartureTime={0};
     tm estDestinationTime={0};
     int Maxpassenger=0;
-    tm* temp = { 0 };
-    unordered_map<tm*, int> RemainTickets = { {temp,{}} };
-    unordered_map<tm*, vector<int>>Bookedlist = { {temp,{}} }; //tm, vector id
+    unordered_map<string, int> RemainTickets = { {"0",{}} };
+    unordered_map<string, vector<int>>Bookedlist = { {"0",{}}}; //tm, vector id
     //vector<queue<int>>a;
-    unordered_map<tm*, queue<int>>Inqueuelist{ {temp,{}} }; //tm, queue id
+    unordered_map<string, queue<int>>Inqueuelist{ {"0",{}}}; //string=date, queue id
 
     vector<string> SearchLine(string depart, string desti);
     vector<vector<string>> SearchIndirectLine(string depart, string desti);
     string SearchDepart(string LineNo);
     string SearchDesti(string LinNo);
     double SearchDistance(string LineNo);
-    int SearchRemainTicket(string LineNo);
+    int SearchRemainTicket(tm date,string LineNo);
     void QueueOut(tm date);
 private:
 

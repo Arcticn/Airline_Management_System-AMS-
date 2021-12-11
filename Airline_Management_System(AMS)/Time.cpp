@@ -1,6 +1,5 @@
 #include "AMS.h"
 
-tm CurDate={0};
 tm CurTime={0};
 time_t rawtime{};
 
@@ -10,6 +9,21 @@ void SyncTime() {
 		localtime_s(&CurTime, &rawtime);
 		this_thread::sleep_for(chrono::seconds(3));
 	}
+}
+
+void RefreshLine()
+{
+	int day = 0;
+	while (true) {
+		if (day != CurTime.tm_mday) {
+			tm 
+			for (auto a : AirlineInfoDatabase) {
+				a.RemainTickets.insert({});
+			}
+			day = CurTime.tm_mday;
+		}
+	}
+	return;
 }
 
 bool operator<(const tm &lhs, const tm &rhs) {
@@ -35,7 +49,7 @@ tm &operator+=(const tm &lhs,int rhs)
 	auto tt = system_clock::to_time_t(tp);
 	tm ttt;
 	localtime_s(&ttt,&tt);
-	tm ans;
+	tm ans={0};
 	ans.tm_year = ttt.tm_year;
 	ans.tm_mon = ttt.tm_mon;
 	ans.tm_mday = ttt.tm_mday;
