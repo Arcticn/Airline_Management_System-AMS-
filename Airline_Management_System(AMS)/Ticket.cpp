@@ -2,6 +2,7 @@
 
 bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 {
+	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Calc date
 	tm date;
 	date.tm_year = CurTime->tm_year;
@@ -9,21 +10,20 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 	date.tm_mday = CurTime->tm_mday;
 	if (diffday > 15)return false;
 	date += diffday;
-	int lineid = LineQuickFind[LineNo];
 	//Compare
-	if (AirlineInfoDatabase[lineid].RemainTickets < amount) {
+	if (line.RemainTickets[date] < amount) {
 		for (size_t i = 0; i < amount; i++)
-			AirlineInfoDatabase[lineid].Inqueuelist[date].push(Id);
+			line.Inqueuelist[date].push(Id);
 		return true;
 	}
 	else {
 		//AirlineInfo Part
 		//Initializes	
-		AirlineInfoDatabase[lineid].Bookedlist.insert({ date,{} });
+		line.Bookedlist.insert({ date,{} });
 		//Add
 		for (size_t i = 0; i < amount; i++)
-			AirlineInfoDatabase[lineid].Bookedlist[date].emplace_back(Id);
-		AirlineInfoDatabase[lineid].RemainTickets -= amount;
+			line.Bookedlist[date].emplace_back(Id);
+		line.RemainTickets[date] -= amount;
 		//Passenger Part
 		for (size_t i = 0; i < amount; i++)
 			PassengerDatabase[Id].tickets.emplace_back(Ticket(Id, LineNo, CurTime,date));
@@ -33,21 +33,21 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 
 bool Ticket::Order(int id, string LineNo, int amount, tm date, bool ifqueue)
 {
-	int lineid = LineQuickFind[LineNo];
+	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Compare
-	if (AirlineInfoDatabase[lineid].RemainTickets < amount) {
+	if (line.RemainTickets[date] < amount) {
 		for (size_t i = 0; i < amount; i++)
-			AirlineInfoDatabase[lineid].Inqueuelist[date].push(Id);
+			line.Inqueuelist[date].push(Id);
 		return true;
 	}
 	else {
 		//AirlineInfo Part
 		//Initializes	
-		AirlineInfoDatabase[lineid].Bookedlist.insert({ date,{} });
+		line.Bookedlist.insert({ date,{} });
 		//Add
 		for (size_t i = 0; i < amount; i++)
-			AirlineInfoDatabase[lineid].Bookedlist[date].emplace_back(Id);
-		AirlineInfoDatabase[lineid].RemainTickets -= amount;
+			line.Bookedlist[date].emplace_back(Id);
+		line.RemainTickets[date] -= amount;
 		//Passenger Part
 		for (size_t i = 0; i < amount; i++)
 			PassengerDatabase[Id].tickets.emplace_back(Ticket(Id, LineNo, CurTime, date));
@@ -57,11 +57,13 @@ bool Ticket::Order(int id, string LineNo, int amount, tm date, bool ifqueue)
 
 bool Ticket::Refund(Ticket ticket)
 {
+	auto &line = AirlineInfoDatabase[LineQuickFind[ticket.LineNo]];
 	auto it1 = find(PassengerDatabase[ticket.Id].tickets.begin(), PassengerDatabase[ticket.Id].tickets.end(), ticket);
 	PassengerDatabase[ticket.Id].tickets.erase(it1);
-	auto it2 = find(AirlineInfoDatabase[LineQuickFind[ticket.LineNo]].Bookedlist[ticket.FlightDate].begin(), AirlineInfoDatabase[LineQuickFind[ticket.LineNo]].Bookedlist[ticket.FlightDate].end(), ticket.Id);
-	AirlineInfoDatabase[LineQuickFind[ticket.LineNo]].Bookedlist[ticket.FlightDate].erase(it2);
-	AirlineInfoDatabase[LineQuickFind[ticket.LineNo]].QueueOut(ticket.FlightDate);
+	auto it2 = find(line.Bookedlist[ticket.FlightDate].begin(), line.Bookedlist[ticket.FlightDate].end(), ticket.Id);
+	line.Bookedlist[ticket.FlightDate].erase(it2);
+	if (line.Inqueuelist[ticket.FlightDate].empty()) line.RemainTickets[ticket.FlightDate] += 1;
+	else line.QueueOut(ticket.FlightDate);
 	return false;
 }
 
@@ -71,7 +73,6 @@ size_t Ticket::TicketHash()
 	nano_type diff = end - start;
 	std::hash<int>tichash;
 	return size_t(tichash(diff.count()));
-	
 }
 
 

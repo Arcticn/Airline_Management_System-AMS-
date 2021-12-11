@@ -5,6 +5,17 @@ void UserInterface::TicketOrder() {
 	system("cls");
 	AirlineInfo info = AirlineInfo();
 	string Departure, Destination;
+	char buffer[80];
+	strftime(buffer, 80, "今天是 %F %A", CurTime);
+	cout << buffer << endl;
+	tm Date;
+	cout << "请输入您的出发日期（15天以内）：" << '\n' << "年：";
+	cin >> Date.tm_year;
+	cout << "月：";
+	cin >> Date.tm_mon;
+	cout << "日：";
+	cin >> Date.tm_mday;
+	int diffday = Date - CurDate;
 	cout << "请输入您的出发省份：";
 	cin >> Departure;
 	int n = 1;

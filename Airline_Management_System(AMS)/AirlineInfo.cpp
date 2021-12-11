@@ -48,8 +48,8 @@ double AirlineInfo::SearchDistance(string LineNo)
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].Distance;
 }
 
-int SearchRemaningTicket(string LineNo) {
-	return AirlineInfoDatabase[LineQuickFind[LineNo]].RemainTickets;
+int SearchRemaningTicket(string LineNo,tm date) {
+	return AirlineInfoDatabase[LineQuickFind[LineNo]].RemainTickets[date];
 }
 
 void AirlineInfo::QueueOut(tm date)

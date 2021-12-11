@@ -16,9 +16,12 @@
 #include "File.h"
 #include "QuickUse.h"
 #include "Ticket.h"
-typedef std::chrono::duration<int, std::nano> nano_type;
+typedef duration<int, std::nano> nano_type;
+typedef duration<int, std::ratio<60 * 60 * 24>> days_type;
 
+tm CurDate;
 tm *CurTime;
+time_t rawtime;
 extern vector<string>Company;
 extern vector<Airplane>AirplaneDatabase;
 extern vector<Airport>AirportDatabase;

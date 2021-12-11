@@ -1,14 +1,5 @@
 ﻿#include "AMS.h"
 
-void SyncTime() {
-    time_t rawtime;
-    while (true) {
-        time(&rawtime);
-        CurTime = localtime(&rawtime);
-        this_thread::sleep_for(chrono::seconds(3));
-    }
-}
-
 int main()
 {
     cout << "正在初始化,请稍等...";
@@ -18,6 +9,7 @@ int main()
     file.Read();
     airlinecreator.Creator();
     thread(SyncTime).detach();
+    thread(SyncDate).detach();
     //thread(&AirlineCreator::TicketCreator, ref(airlinecreator)).detach();
     while (true) {
         if(!menu.StartMenu())break;

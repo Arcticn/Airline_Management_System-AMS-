@@ -16,7 +16,7 @@ public:
     tm DepartureTime;
     tm estDestinationTime;
     int Maxpassenger;
-    int RemainTickets;
+    unordered_map<tm, int> RemainTickets;
     unordered_map<tm, vector<int>>Bookedlist; //tm, vector id
     //vector<queue<int>>a;
     unordered_map<tm, queue<int>>Inqueuelist; //tm, queue id
