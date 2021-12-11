@@ -12,21 +12,24 @@ public:
     string Departure;
     string Destination;
     string Airplane;
-    double Distance=0;
-    tm DepartureTime={0};
-    tm estDestinationTime={0};
-    int Maxpassenger=0;
+    double Distance = 0;
+    tm DepartureTime = { 0 };
+    tm estDestinationTime = { 0 };
+    int Maxpassenger = 0;
     unordered_map<string, int> RemainTickets = { {"0",{}} };
-    unordered_map<string, vector<int>>Bookedlist = { {"0",{}}}; //tm, vector id
+    unordered_map<string, vector<int>>Bookedlist = { {"0",{}} }; //tm, vector id
     //vector<queue<int>>a;
-    unordered_map<string, queue<int>>Inqueuelist{ {"0",{}}}; //string=date, queue id
+    unordered_map<string, queue<int>>Inqueuelist{ {"0",{}} }; //string=date, queue id
 
     vector<string> SearchLine(string depart, string desti);
     vector<vector<string>> SearchIndirectLine(string depart, string desti);
     string SearchDepart(string LineNo);
     string SearchDesti(string LinNo);
     double SearchDistance(string LineNo);
-    int SearchRemainTicket(string date,string LineNo);
+    int SearchRemainTicket(string date, string LineNo);
+    tm SearchDeparTime(string LineNo);
+    tm SearchDesTime(string LineNo);
+
     void QueueOut(string date);
 private:
 

@@ -57,6 +57,16 @@ int AirlineInfo::SearchRemainTicket(string LineNo,string date) {
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].RemainTickets[date];
 }
 
+tm AirlineInfo::SearchDeparTime(string LineNo)
+{
+	return AirlineInfoDatabase[LineQuickFind[LineNo]].DepartureTime;
+}
+
+tm AirlineInfo::SearchDesTime(string LineNo)
+{
+	return AirlineInfoDatabase[LineQuickFind[LineNo]].estDestinationTime;
+}
+
 void AirlineInfo::QueueOut(string date)
 {
 	int id=Inqueuelist[date].front();

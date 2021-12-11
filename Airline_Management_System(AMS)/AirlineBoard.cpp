@@ -16,16 +16,40 @@ void AirlineBoard::menu() {
 	else if (choice2 == 2)desti(choice);
 }
 
-void AirlineBoard::depart(int n)
+void AirlineBoard::depart(int ap)
 {
 	system("cls");
-	cout << AirportDatabase[n].AirportName << endl;
+	string CurAP= AirportDatabase[ap].AirportName;
+	cout << CurAP << endl;
+	vector<string>Line;
+	for (auto &c : AirlineInfoDatabase) {
+		if (c.Departure == CurAP)Line.emplace_back(c.LineNo);
+	}
 	AirlineInfo info;
-	vector<string>line(info.SearchDepart());
+	sort(Line.begin(), Line.end(), [&info](const string &s1, const string &s2) {return info.SearchDesTime(s1) < info.SearchDesTime(s2); });
+	int n;
+	for (auto &c : Line) {
+		cout << "机号         抵达机场         出发时间         预计到达时间" << endl;
+		cout << c << "         " << info.SearchDesti(c) << "         " << info.SearchDeparTime(c).tm_hour << ":" << info.SearchDeparTime(c).tm_min;
+		cout << "           " << info.SearchDesTime(c).tm_hour << ":" << info.SearchDesTime(c).tm_min << endl;
+	}
 }
 
-void AirlineBoard::desti(int n)
+void AirlineBoard::desti(int ap)
 {
 	system("cls");
-	cout << AirportDatabase[n].AirportName << endl;
+	string CurAP = AirportDatabase[ap].AirportName;
+	cout << CurAP << endl;
+	vector<string>Line;
+	for (auto &c : AirlineInfoDatabase) {
+		if (c.Destination == CurAP)Line.emplace_back(c.LineNo);
+	}
+	AirlineInfo info;
+	sort(Line.begin(), Line.end(), [&info](const string &s1, const string &s2) {return info.SearchDeparTime(s1) < info.SearchDeparTime(s2); });
+	int n;
+	for (auto &c : Line) {
+		cout << "机号         出发机场         出发时间         预计到达时间"<<endl;
+		cout << c << "         " << info.SearchDepart(c) << "         " << info.SearchDeparTime(c).tm_hour << ":" << info.SearchDeparTime(c).tm_min;
+		cout << "           " << info.SearchDesTime(c).tm_hour << ":" << info.SearchDesTime(c).tm_min << endl;
+	}
 }
