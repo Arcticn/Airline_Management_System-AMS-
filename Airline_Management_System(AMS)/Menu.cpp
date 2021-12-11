@@ -4,6 +4,7 @@ bool Menu::StartMenu() {
     Login login;
     AirlineBoard ab;
     system("cls");
+    cout << "欢迎使用航线管理系统！" << '\n' << endl;
     cout << "1、管理员登录入口" << endl;
     cout << "2、用户端登录入口" << endl;
     cout << "3、查看所有航班信息" << endl;

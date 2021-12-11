@@ -152,8 +152,8 @@ void UserInterface::AirlineSearch() {
 		cout << indirectLine[i][1] << " " << info.SearchDepart(indirectLine[i][1]) << "(中转) " << info.SearchDesti(indirectLine[i][1]) << " " << "余票：" << info.SearchRemainTicket(sDate, indirectLine[i][1]) << endl;
 	}
 	cout << "按任意键返回上级菜单";
-	if(cin.get())cout << "\n" << "正在返回上级菜单...";
-	this_thread::sleep_for(chrono::milliseconds(700));
+	char a;
+	cin >> a;
 	return;
 }
 
@@ -177,6 +177,10 @@ void UserInterface::ViewMyTicket(int uid) {
 		cout << a.DepartureTime.tm_hour << ":" << a.DepartureTime.tm_min << " " << a.estDestinationTime.tm_hour << ":" << a.estDestinationTime.tm_min;
 		cout << a.Company << " " << a.Airplane << endl;
 	}
+	cout << "按任意键返回上级菜单";
+	char a;
+	cin >> a;
+	return;
 }
 
 
