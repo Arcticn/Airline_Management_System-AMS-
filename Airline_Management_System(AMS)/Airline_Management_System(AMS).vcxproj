@@ -162,7 +162,6 @@
     <ClCompile Include="Ticket.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="UserInterface.cpp" />
-    <ClCompile Include="Weather.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AirlineBoard.h" />
@@ -181,7 +180,6 @@
     <ClInclude Include="Ticket.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="UserInterface.h" />
-    <ClInclude Include="Weather.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Airplane.txt" />

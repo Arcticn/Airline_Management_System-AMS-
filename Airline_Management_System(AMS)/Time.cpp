@@ -1,5 +1,9 @@
 #include "AMS.h"
 
+tm CurDate;
+tm *CurTime;
+time_t rawtime;
+
 void SyncTime() {
 	while (true) {
 		time(&rawtime);
@@ -38,7 +42,7 @@ tm &operator+=(const tm &lhs,int rhs)
 	days_type day(rhs);
 	tp = tp + day;
 	auto tt = system_clock::to_time_t(tp);
-	tm *ttt;
+	tm *ttt{};
 	localtime_s(ttt,&tt);
 	tm ans;
 	ans.tm_year = ttt->tm_year;

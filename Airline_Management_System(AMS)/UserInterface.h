@@ -1,6 +1,7 @@
 #pragma once
 struct UserInterface {
 public:
+	UserInterface() = default;
 	UserInterface(int uid):
 		uid(uid){}
 	int uid;

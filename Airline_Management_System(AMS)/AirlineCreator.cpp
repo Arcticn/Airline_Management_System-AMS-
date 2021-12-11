@@ -2,10 +2,10 @@
 
 void AirlineCreator::Creator() {
 	int number = 0;
-	for (size_t i = 0, length = AirportDatabase.size(); i < length; i++)
+	for (int i = 0, length = AirportDatabase.size(); i < length; i++)
 	{
 		vector<int>Destination(DestinationCreator(static_cast<int>(i), 30));
-		for (size_t j = 0; j < 30; j++)
+		for (int j = 0; j < 30; j++)
 		{
 			int planeid = AirplaneCreator();
 			//Calculate the distance
@@ -36,7 +36,7 @@ void AirlineCreator::Creator() {
 	}
 	LineQuickFind.clear(); number = 0;
 	sort(AirlineInfoDatabase.begin(), AirlineInfoDatabase.end(), [](const AirlineInfo &a1, const AirlineInfo &a2) {return a1.DepartureTime < a2.DepartureTime; });
-	for (auto c : AirlineInfoDatabase) {
+	for (auto &c : AirlineInfoDatabase) {
 		LineQuickFind.insert({ c.LineNo,number++ });
 	}
 	PassengerCreator();
@@ -149,9 +149,9 @@ vector<int> AirlineCreator::DestinationCreator(int depart, int number) {
 
 void AirlineCreator::PassengerCreator()
 {
-	for (size_t i = 0; i < 100000; i++)
+	for (int i = 0; i < 100000; i++)
 	{
-		PassengerDatabase.insert({ i, Passenger(i) });
+		PassengerDatabase.insert({ i, Passenger(i) });//i, Passenger(i)
 		User.insert({ to_string(i),to_string(i) });
 		UserToID.insert({ to_string(i),i });
 	}

@@ -39,9 +39,6 @@
     <ClCompile Include="AirlineCreator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Weather.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="File.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -84,9 +81,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="AirlineCreator.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Weather.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="File.h">

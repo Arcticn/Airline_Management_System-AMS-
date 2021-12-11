@@ -1,4 +1,4 @@
-#include"AirlineBoard.h"
+#include"AMS.h"
 void AirlineBoard() {
 
 }

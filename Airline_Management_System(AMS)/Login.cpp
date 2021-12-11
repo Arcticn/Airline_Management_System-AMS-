@@ -1,5 +1,6 @@
 #include "AMS.h"
-#include "Login.h"
+
+int User_ID = 100000;
 
 void Login::UserRegister() {
     string username;

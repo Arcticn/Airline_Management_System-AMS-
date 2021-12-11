@@ -3,7 +3,7 @@
 vector<string> AirlineInfo::SearchLine(string depart, string desti)
 {
 	vector<string>ans;
-	for (auto c : AirlineInfoDatabase) {
+	for (auto &c : AirlineInfoDatabase) {
 		if (c.Destination == desti)
 			if (c.Departure == depart)
 				ans.emplace_back(c.LineNo);
@@ -16,14 +16,14 @@ vector<vector<string>> AirlineInfo::SearchIndirectLine(string depart, string des
 	vector<string> first;
 	vector<vector<string>>ans;
 	vector<string>temp;
-	for (auto c : AirlineInfoDatabase) {
+	for (auto &c : AirlineInfoDatabase) {
 		if (c.Departure == depart && c.Destination != desti)
 			first.emplace_back(c.LineNo);
 	}
-	for (auto c : first) {
+	for (auto &c : first) {
 		string t = SearchDesti(c);
 		vector<string>tt(SearchLine(t, desti));
-		for (auto d : tt) {
+		for (auto &d : tt) {
 			temp.clear();
 			temp.emplace_back(c);
 			temp.emplace_back(d);
@@ -48,14 +48,19 @@ double AirlineInfo::SearchDistance(string LineNo)
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].Distance;
 }
 
+int AirlineInfo::SearchRemainTicket(string LineNo)
+{
+	return 0;
+}
+
 int SearchRemaningTicket(string LineNo,tm date) {
-	return AirlineInfoDatabase[LineQuickFind[LineNo]].RemainTickets[date];
+	return AirlineInfoDatabase[LineQuickFind[LineNo]].RemainTickets[&date];
 }
 
 void AirlineInfo::QueueOut(tm date)
 {
-	int id=Inqueuelist[date].front();
+	int id=Inqueuelist[&date].front();
 	Ticket tic;
 	tic.Order(id, this->LineNo, 1, date, 1);
-	Inqueuelist[date].pop();
+	Inqueuelist[&date].pop();
 }

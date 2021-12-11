@@ -1,5 +1,10 @@
 #include "AMS.h"
 
+bool operator==(const Ticket &lhs, const Ticket &rhs)
+{
+	return lhs.TicketNo == rhs.TicketNo && lhs.Date == rhs.Date;
+}
+
 bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 {
 	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
@@ -11,19 +16,20 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 	if (diffday > 15)return false;
 	date += diffday;
 	//Compare
-	if (line.RemainTickets[date] < amount) {
+	if (line.RemainTickets[&date] < amount) {
+		line.Inqueuelist.insert({ &date,{} });
 		for (size_t i = 0; i < amount; i++)
-			line.Inqueuelist[date].push(Id);
+			line.Inqueuelist[&date].emplace(Id);
 		return true;
 	}
 	else {
 		//AirlineInfo Part
 		//Initializes	
-		line.Bookedlist.insert({ date,{} });
+		line.Bookedlist.insert({ &date,{} });
 		//Add
 		for (size_t i = 0; i < amount; i++)
-			line.Bookedlist[date].emplace_back(Id);
-		line.RemainTickets[date] -= amount;
+			line.Bookedlist[&date].emplace_back(Id);
+		line.RemainTickets[&date] -= amount;
 		//Passenger Part
 		for (size_t i = 0; i < amount; i++)
 			PassengerDatabase[Id].tickets.emplace_back(Ticket(Id, LineNo, CurTime,date));
@@ -35,19 +41,20 @@ bool Ticket::Order(int Id, string LineNo, int amount, tm date, bool ifqueue)
 {
 	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Compare
-	if (line.RemainTickets[date] < amount) {
+	if (line.RemainTickets[&date] < amount) {
+		line.Inqueuelist.insert({ &date,{} });
 		for (size_t i = 0; i < amount; i++)
-			line.Inqueuelist[date].push(Id);
+			line.Inqueuelist[&date].emplace(Id);
 		return true;
 	}
 	else {
 		//AirlineInfo Part
 		//Initializes	
-		line.Bookedlist.insert({ date,{} });
+		line.Bookedlist.insert({ &date,{} });
 		//Add
 		for (size_t i = 0; i < amount; i++)
-			line.Bookedlist[date].emplace_back(Id);
-		line.RemainTickets[date] -= amount;
+			line.Bookedlist[&date].emplace_back(Id);
+		line.RemainTickets[&date] -= amount;
 		//Passenger Part
 		for (size_t i = 0; i < amount; i++)
 			PassengerDatabase[Id].tickets.emplace_back(Ticket(Id, LineNo, CurTime, date));
@@ -61,9 +68,9 @@ bool Ticket::Refund(Ticket ticket)
 	auto &line = AirlineInfoDatabase[LineQuickFind[ticket.LineNo]];
 	auto it1 = find(PassengerDatabase[ticket.Id].tickets.begin(), PassengerDatabase[ticket.Id].tickets.end(), ticket);
 	PassengerDatabase[ticket.Id].tickets.erase(it1);
-	auto it2 = find(line.Bookedlist[ticket.FlightDate].begin(), line.Bookedlist[ticket.FlightDate].end(), ticket.Id);
-	line.Bookedlist[ticket.FlightDate].erase(it2);
-	if (line.Inqueuelist[ticket.FlightDate].empty()) line.RemainTickets[ticket.FlightDate] += 1;
+	auto it2 = find(line.Bookedlist[&ticket.FlightDate].begin(), line.Bookedlist[&ticket.FlightDate].end(), ticket.Id);
+	line.Bookedlist[&ticket.FlightDate].erase(it2);
+	if (line.Inqueuelist[&ticket.FlightDate].empty()) line.RemainTickets[&ticket.FlightDate] += 1;
 	else line.QueueOut(ticket.FlightDate);
 	return false;
 }

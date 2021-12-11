@@ -1,6 +1,4 @@
 #pragma once
-
-
 class AirlineCreator {
 public:
 	std::chrono::high_resolution_clock::time_point start = high_resolution_clock::now();

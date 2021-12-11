@@ -4,10 +4,10 @@ class Passenger
 {
 public:
     Passenger() = default;
-    Passenger(int id, vector<Ticket>ticket) :
-        Id(id), tickets(ticket) {}
     Passenger(int id) :
         Id(id) {}
-    int Id;
-    vector<Ticket>tickets;
+    Passenger(int id, vector<Ticket>ticket) :
+        Id(id), tickets(ticket) {}
+    int Id = 0;
+    vector<Ticket>tickets = {};
 };
