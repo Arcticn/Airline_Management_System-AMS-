@@ -53,10 +53,6 @@ int AirlineInfo::SearchRemainTicket(string date,string LineNo)
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].RemainTickets[date];
 }
 
-int AirlineInfo::SearchRemainTicket(string LineNo,string date) {
-	return AirlineInfoDatabase[LineQuickFind[LineNo]].RemainTickets[date];
-}
-
 tm AirlineInfo::SearchDeparTime(string LineNo)
 {
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].DepartureTime;

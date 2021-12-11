@@ -2,6 +2,7 @@
 
 bool Menu::StartMenu() {
     Login login;
+    AirlineBoard ab;
     system("cls");
     cout << "1、管理员登录入口" << endl;
     cout << "2、用户端登录入口" << endl;
@@ -19,7 +20,7 @@ bool Menu::StartMenu() {
         login.UserLogin();
         return true;
     case 3:
-        AirlineBoard();
+        ab.menu();
         return true;
     case 0:
         return false;
@@ -43,16 +44,16 @@ void Menu::UserMenu(int uid) {
         switch (n)
         {
         case 1:
-            ui.TicketOrder();
+            ui.TicketOrder(uid);
             break;
         case 2:
             ui.AirlineSearch();
             break;
         case 3:
-            ui.TicketDiscard();
+            ui.TicketDiscard(uid);
             break;
         case 4:
-            ui.ViewMyTicket();
+            ui.ViewMyTicket(uid);
             break;
         case 0:
             goto outport;
@@ -65,7 +66,7 @@ outport:return;
 }
 
 void Menu::SuperUserMenu() {
-    UserInterface ui = UserInterface(1);
+    SuperUserInterface ui = SuperUserInterface();
     while (true) {
         system("cls");
         cout << "1、订票" << '\n';
@@ -78,16 +79,16 @@ void Menu::SuperUserMenu() {
         switch (n)
         {
         case 1:
-            ui.TicketOrder();
+            ui.SuperTicketOrder();
             break;
         case 2:
-            ui.AirlineSearch();
+            ui.SuperAirlineSearch();
             break;
         case 3:
-            ui.TicketDiscard();
+            ui.SuperTicketDiscard();
             break;
         case 4:
-            ui.ViewMyTicket();
+            ui.SuperViewTicket();
             break;
         case 0:
             goto outport;

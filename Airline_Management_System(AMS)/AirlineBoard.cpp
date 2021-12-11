@@ -1,4 +1,5 @@
 #include"AMS.h"
+
 void AirlineBoard::menu() {
 	system("cls");
 	int n = 1;
@@ -28,11 +29,18 @@ void AirlineBoard::depart(int ap)
 	AirlineInfo info;
 	sort(Line.begin(), Line.end(), [&info](const string &s1, const string &s2) {return info.SearchDesTime(s1) < info.SearchDesTime(s2); });
 	int n;
+	cout << "机号"<<'\t'<<"抵达机场"<<'\t'<<"出发时间"<<'\t'<<"预计到达时间" << endl;
 	for (auto &c : Line) {
-		cout << "机号         抵达机场         出发时间         预计到达时间" << endl;
-		cout << c << "         " << info.SearchDesti(c) << "         " << info.SearchDeparTime(c).tm_hour << ":" << info.SearchDeparTime(c).tm_min;
-		cout << "           " << info.SearchDesTime(c).tm_hour << ":" << info.SearchDesTime(c).tm_min << endl;
+		char buffer1[10],buffer2[10];
+		tm t1 = info.SearchDeparTime(c), t2 = info.SearchDesTime(c);
+		strftime(buffer1, 10, "%R", &t1);
+		strftime(buffer2, 10, "%R", &t2);
+		cout << c << '\t'<< info.SearchDesti(c) <<'\t' << '\t' << buffer1;
+		cout << '\t' << buffer2<< endl;
 	}
+	cout << "按任意键返回上级菜单";
+	char a;
+	cin >> a;
 }
 
 void AirlineBoard::desti(int ap)
@@ -47,9 +55,17 @@ void AirlineBoard::desti(int ap)
 	AirlineInfo info;
 	sort(Line.begin(), Line.end(), [&info](const string &s1, const string &s2) {return info.SearchDeparTime(s1) < info.SearchDeparTime(s2); });
 	int n;
+	cout << "机号" << '\t' << "抵达机场" << '\t' << "出发时间" << '\t' << "预计到达时间" << endl;
 	for (auto &c : Line) {
-		cout << "机号         出发机场         出发时间         预计到达时间"<<endl;
-		cout << c << "         " << info.SearchDepart(c) << "         " << info.SearchDeparTime(c).tm_hour << ":" << info.SearchDeparTime(c).tm_min;
-		cout << "           " << info.SearchDesTime(c).tm_hour << ":" << info.SearchDesTime(c).tm_min << endl;
+		char buffer1[10], buffer2[10];
+		tm t1 = info.SearchDeparTime(c), t2 = info.SearchDesTime(c);
+		strftime(buffer1, 10, "%R", &t1);
+		strftime(buffer2, 10, "%R", &t2);
+		cout << c << '\t' << info.SearchDepart(c) << '\t' << '\t' << buffer1;
+		cout << '\t' << buffer2 << endl;
 	}
+	cout << "按任意键返回上级菜单";
+	char a;
+	cin >> a;
 }
+

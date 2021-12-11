@@ -10,9 +10,5 @@ public:
 	void AirlineSearch();
 	void TicketDiscard(int uid);
 	void ViewMyTicket(int uid);
-	friend void SuperUserInterface::SuperTicketOrder(UserInterface u);
-	friend void SuperUserInterface::SuperAirlineSearch(UserInterface u);
-	friend void SuperUserInterface::SuperTicketDiscard(UserInterface u);
-	friend void SuperUserInterface::SuperViewTicket(UserInterface u);
 private:
 };
