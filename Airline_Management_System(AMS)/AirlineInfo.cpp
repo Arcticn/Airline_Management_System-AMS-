@@ -48,16 +48,16 @@ double AirlineInfo::SearchDistance(string LineNo)
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].Distance;
 }
 
-int AirlineInfo::SearchRemainTicket(tm date,string LineNo)
+int AirlineInfo::SearchRemainTicket(string date,string LineNo)
 {
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].RemainTickets[date];
 }
 
-int SearchRemaningTicket(string LineNo,tm date) {
+int SearchRemaningTicket(string LineNo,string date) {
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].RemainTickets[date];
 }
 
-void AirlineInfo::QueueOut(tm date)
+void AirlineInfo::QueueOut(string date)
 {
 	int id=Inqueuelist[date].front();
 	Ticket tic;

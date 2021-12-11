@@ -16,6 +16,7 @@ void UserInterface::TicketOrder() {
 	cout << "日：";
 	cin >> Date.tm_mday;
 	int diffday = Date - CurTime;
+	string sDate = to_string(Date.tm_year) + to_string(Date.tm_mon) + to_string(Date.tm_mday);
 	cout << "请输入您的出发省份：";
 	cin >> Departure;
 	int n = 1;
@@ -56,8 +57,8 @@ void UserInterface::TicketOrder() {
 	for (size_t i = 0, length = indirectLine.size(); i < length; i++)
 	{
 		cout << n++ << "、" << endl;
-		cout << indirectLine[i][0] << " " << info.SearchDepart(indirectLine[i][0]) << " " << info.SearchDesti(indirectLine[i][0]) << "(中转) " << "余票：" << info.SearchRemainTicket(Date,indirectLine[i][0]) << endl;
-		cout << indirectLine[i][1] << " " << info.SearchDepart(indirectLine[i][1]) << "(中转) " << info.SearchDesti(indirectLine[i][1]) << " " << "余票：" << info.SearchRemainTicket(Date,indirectLine[i][1]) << endl;
+		cout << indirectLine[i][0] << " " << info.SearchDepart(indirectLine[i][0]) << " " << info.SearchDesti(indirectLine[i][0]) << "(中转) " << "余票：" << info.SearchRemainTicket(sDate,indirectLine[i][0]) << endl;
+		cout << indirectLine[i][1] << " " << info.SearchDepart(indirectLine[i][1]) << "(中转) " << info.SearchDesti(indirectLine[i][1]) << " " << "余票：" << info.SearchRemainTicket(sDate,indirectLine[i][1]) << endl;
 
 	}
 	cout << "请输入您的选择：";

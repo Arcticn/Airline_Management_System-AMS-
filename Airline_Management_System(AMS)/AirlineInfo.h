@@ -26,8 +26,8 @@ public:
     string SearchDepart(string LineNo);
     string SearchDesti(string LinNo);
     double SearchDistance(string LineNo);
-    int SearchRemainTicket(tm date,string LineNo);
-    void QueueOut(tm date);
+    int SearchRemainTicket(string date,string LineNo);
+    void QueueOut(string date);
 private:
 
 };
