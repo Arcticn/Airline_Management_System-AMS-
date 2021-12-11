@@ -18,7 +18,7 @@ void UserInterface::TicketOrder(int uid) {
 	Date.tm_year -= 1900;
 	Date.tm_mon -= 1;  //Sync with tm
 	int diffday = Date - CurTime;
-	string sDate = to_string(Date.tm_year) + to_string(Date.tm_mon) + to_string(Date.tm_mday);
+	string sDate = to_string(Date.tm_year+1900) + to_string(Date.tm_mon+1) + to_string(Date.tm_mday);
 	cout << "请输入您的出发省份：";
 	cin >> Departure;
 	int n = 1;

@@ -15,7 +15,7 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 	temp.tm_mon = CurTime.tm_mon;
 	temp.tm_mday = CurTime.tm_mday;
 	temp =temp+ diffday;
-	string date = to_string(temp.tm_year) + to_string(temp.tm_mon) + to_string(temp.tm_mday);
+	string date = to_string(temp.tm_year+1900) + to_string(temp.tm_mon+1) + to_string(temp.tm_mday);
 	//Compare
 	if (line.RemainTickets[date] < amount) {
 		line.Inqueuelist.insert({ date,{} });
