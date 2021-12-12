@@ -5,3 +5,4 @@ void RefreshLine();
 bool operator<(const tm &lhs, const tm &rhs);
 tm operator+(tm &lhs,int rhs);
 int operator-(tm &lhs, tm &rhs);
+ostream &operator<<(ostream &os, const tm &rhs);

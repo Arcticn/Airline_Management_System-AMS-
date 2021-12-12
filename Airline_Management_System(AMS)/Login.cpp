@@ -12,20 +12,20 @@ void Login::UserRegister() {
         cin >> username;
         if (username == "0")goto outport;
         if (User.find(username) != User.end()) {
-            cout << '\n' << "用户名" << username << "已被占用，请重新输入，退出请输入0！" << endl;
+            cout << "用户名" << username << "已被占用，请重新输入，退出请输入0！" << endl;
             this_thread::sleep_for(chrono::milliseconds(700));
             system("cls");
         }
         else break;
     }
-    cout << '\n' << "请输入密码：";
+    cout << "请输入密码：";
     cin >> password;
     if (password == "0")goto outport;
     User.insert({ username,password });
     PassengerDatabase.insert({ User_ID,Passenger(User_ID)});
     UserToID.insert({ username,User_ID });
     User_ID += 1;
-    cout << '\n' << "注册成功！2秒后跳转回登陆界面";
+    cout << "注册成功！2秒后跳转回登陆界面";
     this_thread::sleep_for(chrono::seconds(2));
     system("cls");
     UserLogin();
@@ -73,7 +73,7 @@ void Login::UserLogin() {
     string username;
     string password;
     while (true) {
-        cout << "若要注册请输入Register，请输入您的账号：" << endl;
+        cout << "若要注册请输入Register"<<'\n'<<"请输入您的账号：" ;
         cin >> username;
         if (username == "0")goto outport;
         if (username == "Register")UserRegister();

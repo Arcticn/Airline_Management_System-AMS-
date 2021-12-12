@@ -89,3 +89,8 @@ int operator-(tm &lhs, tm &rhs)
 	days_type diff = duration_cast<days_type> (d);
 	return diff.count();
 }
+
+ostream &operator<<(ostream &os, const tm &rhs) {
+	os << setfill('0') << setw(2) << rhs.tm_hour << ":" << setw(2) << rhs.tm_min<<setfill(' ');
+	return os;
+}

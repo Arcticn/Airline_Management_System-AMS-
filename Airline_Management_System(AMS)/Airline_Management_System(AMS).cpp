@@ -18,7 +18,6 @@ int main()
     this_thread::sleep_for(chrono::seconds(1));
     //airlinecreator.TicketCreator();
     thread(&AirlineCreator::TicketCreator, ref(airlinecreator)).detach();
-    this_thread::sleep_for(chrono::seconds(1));
     while (true) {
         if(!menu.StartMenu())break;
     }

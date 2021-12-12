@@ -1,5 +1,7 @@
 #include "AMS.h"
 
+mutex mu;
+
 bool operator==(const Ticket &lhs, const Ticket &rhs)
 {
 	return lhs.TicketNo == rhs.TicketNo ;
@@ -16,7 +18,7 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 	temp.tm_mday = CurTime.tm_mday;
 	temp =temp+ diffday;
 	string date = to_string(temp.tm_year+1900) + to_string(temp.tm_mon+1) + to_string(temp.tm_mday);
-	mutex mu;
+	
 	//Compare
 	mu.lock();
 	if (line.RemainTickets[date] < amount) {
@@ -46,11 +48,12 @@ bool Ticket::Order(int Id, string LineNo, int amount, string date, bool ifqueue)
 {
 	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Compare
-
+	mu.lock();
 	if (line.RemainTickets[date] < amount) {
 		line.Inqueuelist.insert({ date,{} });
 		for (size_t i = 0; i < amount; i++)
 			line.Inqueuelist[date].emplace(Id);
+		mu.unlock();
 		return true;
 	}
 	else {
@@ -64,6 +67,7 @@ bool Ticket::Order(int Id, string LineNo, int amount, string date, bool ifqueue)
 		//Passenger Part
 		for (size_t i = 0; i < amount; i++)
 			PassengerDatabase[Id].tickets.emplace_back(Ticket(Id, LineNo, CurTime, date));
+		mu.unlock();
 		return true;
 	}
 }

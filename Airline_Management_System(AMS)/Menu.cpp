@@ -7,7 +7,7 @@ bool Menu::StartMenu() {
     cout << "欢迎使用航线管理系统！" << '\n' << endl;
     cout << "1、管理员登录入口" << endl;
     cout << "2、用户端登录入口" << endl;
-    cout << "3、查看所有航班信息" << endl;
+    cout << "3、航线公示板" << endl;
     cout << "0、退出系统" << endl;
     cout << "请输入您的选择:";
     char n;
@@ -17,17 +17,22 @@ bool Menu::StartMenu() {
     case '1':
         login.SuperLogin();
         return true;
+        break;
     case '2':
         login.UserLogin();
         return true;
+        break;
     case '3':
         ab.menu();
         return true;
+        break;
     case '0':
         return false;
+        break;
     default:
         cout << "您的输入有误，请重新输入！" << endl;
         return true;
+        break;
     }
 }
 
@@ -38,7 +43,7 @@ void Menu::UserMenu(int uid) {
         cout << "1、订票" << '\n';
         cout << "2、查询航班" << '\n';
         cout << "3、退票" << '\n';
-        cout << "4、查看我的航班" << '\n';
+        cout << "4、查看我的机票" << '\n';
         cout << "0、返回上级菜单" << '\n';
         cout << "请输入您的选择：";
         char n; cin >> n;
@@ -58,6 +63,7 @@ void Menu::UserMenu(int uid) {
             break;
         case '0':
             goto outport;
+            break;
         default:
             cout << "您的输入有误，请重新输入！" << endl;
             break;
@@ -73,7 +79,7 @@ void Menu::SuperUserMenu() {
         cout << "1、订票" << '\n';
         cout << "2、查询航班" << '\n';
         cout << "3、退票" << '\n';
-        cout << "4、查看当前航班信息" << '\n';
+        cout << "4、查看机票信息" << '\n';
         cout << "0、返回上级菜单" << '\n';
         cout << "请输入您的选择：";
         char n; cin >> n;
@@ -93,6 +99,7 @@ void Menu::SuperUserMenu() {
             break;
         case '0':
             goto outport;
+            break;
         default:
             cout << "您的输入有误，请重新输入！" << endl;
             break;

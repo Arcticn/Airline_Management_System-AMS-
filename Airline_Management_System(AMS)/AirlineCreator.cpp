@@ -1,5 +1,7 @@
 #include "AMS.h"
 
+std::chrono::high_resolution_clock::time_point start = high_resolution_clock::now();
+
 void AirlineCreator::Creator() {
 	int number = 0;
 	for (int i = 0, length = AirportDatabase.size(); i < length; i++)

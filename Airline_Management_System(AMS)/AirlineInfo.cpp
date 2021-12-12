@@ -43,6 +43,16 @@ string AirlineInfo::SearchDesti(string LineNo)
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].Destination;
 }
 
+string AirlineInfo::SearchCompany(string LineNo)
+{
+	return AirlineInfoDatabase[LineQuickFind[LineNo]].Company;
+}
+
+string AirlineInfo::SearchAirplane(string LineNo)
+{
+	return AirlineInfoDatabase[LineQuickFind[LineNo]].Airplane;
+}
+
 double AirlineInfo::SearchDistance(string LineNo)
 {
 	return AirlineInfoDatabase[LineQuickFind[LineNo]].Distance;

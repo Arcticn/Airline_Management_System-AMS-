@@ -19,6 +19,7 @@
 typedef duration<int, std::nano> nano_type;
 typedef duration<int, std::ratio<60 * 60 * 24>> days_type;
 
+extern high_resolution_clock::time_point start; //高精度时钟，用于随机数
 extern tm CurTime; //当前时间（tm）
 extern time_t rawtime; //当前时间（time_t）
 extern int User_ID;  //全局用户ID数
@@ -31,7 +32,3 @@ extern unordered_map<string, int>UserToID; //用户账号的用户名 -> 客户ID
 extern unordered_map<string, int>LineQuickFind; //航班号 -> AirlineInfoDatabase中对应的下标
 extern map<string, string>Superuser; // 存储超级用户的用户名和密码
 extern unordered_map<string, string>User; // 存储普通用户的用户名和密码
-
-//Time aa = { "星期日","2021-11-30","20:30" };
-//AirlineInfo a ( "东方航空","CA4563","上海","北京","C919",aa,aa,260,20 );
-
