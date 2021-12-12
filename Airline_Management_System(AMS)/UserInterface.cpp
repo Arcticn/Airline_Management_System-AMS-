@@ -17,7 +17,7 @@ void UserInterface::TicketOrder(int uid) {
 	cin >> Date.tm_mday;
 	Date.tm_year -= 1900;
 	Date.tm_mon -= 1;  //Sync with tm
-	int diffday = Date - CurTime;
+
 	string sDate = to_string(Date.tm_year+1900) + to_string(Date.tm_mon+1) + to_string(Date.tm_mday);
 	cout << "请输入您的出发省份：";
 	cin >> Departure;
@@ -54,7 +54,7 @@ void UserInterface::TicketOrder(int uid) {
 	sort(indirectLine.begin(), indirectLine.end(), [&info](const vector<string> &v1, const vector<string> &v2) {return (info.SearchDistance(v1[0]) + info.SearchDistance(v1[1])) < (info.SearchDistance(v2[0]) + info.SearchDistance(v2[1])); });
 	n = 1;
 	for (size_t i = 0, length = directLine.size(); i < length; i++)
-		cout << n++ << "、" << '\n' << directLine[i] << " " << DEPA[choice1 - 1] << " " << DEST[choice2 - 1] << " " << endl;
+		cout << n++ << "、" << '\n' << directLine[i] << " " << DEPA[choice1 - 1] << " " << DEST[choice2 - 1] << " " << "余票：" << info.SearchRemainTicket(sDate, directLine[i]) << endl;
 	int border = --n;
 	for (size_t i = 0, length = indirectLine.size(); i < length; i++)
 	{
@@ -78,12 +78,12 @@ void UserInterface::TicketOrder(int uid) {
 	if (idea == 'Y') ifqueue = 1;
 	else ifqueue = 0;
 	if (choice3 <= border) {
-		if (tic.Order(uid, directLine[choice3], amount, diffday, ifqueue))cout << "购票成功";
+		if (tic.Order(uid, directLine[choice3], amount, sDate, ifqueue))cout << "购票成功";
 		else cout << "购票失败，请重试";
 	}
 	else if (choice3 > border) {
-		if(tic.Order(uid, indirectLine[choice3][0], amount, diffday, ifqueue)
-		&& tic.Order(uid, indirectLine[choice3][1], amount, diffday, ifqueue))cout << "购票成功";
+		if(tic.Order(uid, indirectLine[choice3][0], amount, sDate, ifqueue)
+		&& tic.Order(uid, indirectLine[choice3][1], amount, sDate, ifqueue))cout << "购票成功";
 		else cout << "购票失败，请重试";
 	}
 	cout << "\n" << "正在返回上级菜单...";
@@ -173,9 +173,10 @@ void UserInterface::TicketDiscard(int uid) {
 void UserInterface::ViewMyTicket(int uid) {
 	int n = 1;
 	for (auto &a : PassengerDatabase[uid].tickets) {
-		cout << n++ << "、" << a.LineNo << " " << a.FlightDate << " " << a.Departure << " " << a.Destination << " ";
-		cout << a.DepartureTime.tm_hour << ":" << a.DepartureTime.tm_min << " " << a.estDestinationTime.tm_hour << ":" << a.estDestinationTime.tm_min;
-		cout << a.Company << " " << a.Airplane << endl;
+		auto &line = AirlineInfoDatabase[LineQuickFind[a.LineNo]];
+		cout << n++ << "、" << a.LineNo << " " << a.FlightDate << " " << line.Departure << " " << line.Destination << " ";
+		cout << line.DepartureTime.tm_hour << ":" << line.DepartureTime.tm_min << " " << line.estDestinationTime.tm_hour << ":" << line.estDestinationTime.tm_min;
+		cout << line.Company << " " << line.Airplane << endl;
 	}
 	cout << "按任意键返回上级菜单";
 	char a;

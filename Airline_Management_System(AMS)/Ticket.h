@@ -1,14 +1,15 @@
 #pragma once
 #include "AMS.h"
 
-class Ticket:public AirlineInfo
+class Ticket
 {
 public:
 	Ticket() = default;
 	Ticket(int Id, string LineNo, tm date, string tdate) :
-		Id(Id), AirlineInfo(LineNo), Date(date), FlightDate(tdate), TicketNo(TicketHash()) {}
+		Id(Id), LineNo(LineNo), Date(date), FlightDate(tdate), TicketNo(TicketHash()) {}
 	std::chrono::high_resolution_clock::time_point start = high_resolution_clock::now();
 	int Id=0;
+	string LineNo;
 	tm Date={0};  //购票时间
 	string FlightDate;  //起飞时间
 	size_t TicketNo=0;
