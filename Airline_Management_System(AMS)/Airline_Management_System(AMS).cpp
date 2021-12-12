@@ -8,6 +8,8 @@ int main()
     AirlineCreator airlinecreator=AirlineCreator();
     Menu menu = Menu();
     file.Read();
+    //PassengerDatabase.reserve(100000);
+    AirlineInfoDatabase.reserve(2000);
     airlinecreator.Creator();
     //SyncTime();
     thread(SyncTime).detach();
@@ -16,6 +18,7 @@ int main()
     this_thread::sleep_for(chrono::seconds(1));
     //airlinecreator.TicketCreator();
     thread(&AirlineCreator::TicketCreator, ref(airlinecreator)).detach();
+    this_thread::sleep_for(chrono::seconds(1));
     while (true) {
         if(!menu.StartMenu())break;
     }

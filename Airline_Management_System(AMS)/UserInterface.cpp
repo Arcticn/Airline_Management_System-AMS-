@@ -158,7 +158,13 @@ void UserInterface::AirlineSearch() {
 }
 
 void UserInterface::TicketDiscard(int uid) {
-	ViewMyTicket(uid);
+	int n = 1;
+	for (auto &a : PassengerDatabase[uid].tickets) {
+		auto &line = AirlineInfoDatabase[LineQuickFind[a.LineNo]];
+		cout << n++ << "、" << a.LineNo << " " << a.FlightDate << " " << line.Departure << " " << line.Destination << " ";
+		cout << line.DepartureTime.tm_hour << ":" << line.DepartureTime.tm_min << " " << line.estDestinationTime.tm_hour << ":" << line.estDestinationTime.tm_min;
+		cout << line.Company << " " << line.Airplane << endl;
+	}
 	cout << "输入您想要退订的机票的编号：";
 	int choice;
 	cin >> choice;

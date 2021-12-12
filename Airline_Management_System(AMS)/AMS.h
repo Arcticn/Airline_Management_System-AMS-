@@ -19,18 +19,18 @@
 typedef duration<int, std::nano> nano_type;
 typedef duration<int, std::ratio<60 * 60 * 24>> days_type;
 
-extern tm CurTime;
-extern time_t rawtime;
-extern int User_ID;
-extern vector<string>Company;
-extern vector<Airplane>AirplaneDatabase;
-extern vector<Airport>AirportDatabase;
-extern vector<AirlineInfo>AirlineInfoDatabase;
-extern unordered_map<int, Passenger>PassengerDatabase;
-extern unordered_map<string, int>UserToID;
-extern unordered_map<string, int>LineQuickFind;
-extern map<string, string>Superuser;
-extern unordered_map<string, string>User;
+extern tm CurTime; //当前时间（tm）
+extern time_t rawtime; //当前时间（time_t）
+extern int User_ID;  //全局用户ID数
+extern vector<string>Company; //航空公司列表
+extern vector<Airplane>AirplaneDatabase; //飞机数据库
+extern vector<Airport>AirportDatabase; //机场数据库
+extern vector<AirlineInfo>AirlineInfoDatabase; //航线数据库
+extern unordered_map<int, Passenger>PassengerDatabase; //客户ID -> ID对应的Passenger类型
+extern unordered_map<string, int>UserToID; //用户账号的用户名 -> 客户ID
+extern unordered_map<string, int>LineQuickFind; //航班号 -> AirlineInfoDatabase中对应的下标
+extern map<string, string>Superuser; // 存储超级用户的用户名和密码
+extern unordered_map<string, string>User; // 存储普通用户的用户名和密码
 
 //Time aa = { "星期日","2021-11-30","20:30" };
 //AirlineInfo a ( "东方航空","CA4563","上海","北京","C919",aa,aa,260,20 );
