@@ -24,7 +24,6 @@ void AirlineCreator::Creator() {
 			DesTime.tm_min += diff;
 			DesTime.tm_hour += (DesTime.tm_min / 60);
 			while (DesTime.tm_hour >= 24) {
-				DesTime.tm_wday += 1;
 				DesTime.tm_hour -= 24;
 			}
 			DesTime.tm_min %= 60;
@@ -53,12 +52,12 @@ void AirlineCreator::TicketCreator()
 	nano_type diff = end - start;
 	uniform_int_distribution<unsigned> u1(0, static_cast<int>(AirlineInfoDatabase.size()-1));
 	uniform_int_distribution<unsigned> u2(0, 100000-1);
-	gamma_distribution<double> u3(1.0, 5.0);
+	uniform_int_distribution<unsigned> u3(0,15);
 	while (true) {
 		end = high_resolution_clock::now();
 		diff = end - start;
 		e.seed(diff.count());
-		tic.Order(u2(e),AirlineInfoDatabase[u1(e)].LineNo,1,floor(u3(e)),1);
+		tic.Order(u2(e),AirlineInfoDatabase[u1(e)].LineNo,1,u3(e),1);
 		this_thread::sleep_for(chrono::nanoseconds(1));
 	}
 	return;

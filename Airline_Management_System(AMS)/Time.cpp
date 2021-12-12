@@ -91,6 +91,8 @@ int operator-(tm &lhs, tm &rhs)
 }
 
 ostream &operator<<(ostream &os, const tm &rhs) {
-	os << setfill('0') << setw(2) << rhs.tm_hour << ":" << setw(2) << rhs.tm_min<<setfill(' ');
+	char buffer1[10];
+	strftime(buffer1, 10, "%R", &rhs);
+	cout << buffer1;
 	return os;
 }
