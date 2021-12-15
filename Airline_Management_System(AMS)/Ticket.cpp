@@ -1,7 +1,6 @@
 #include "AMS.h"
 
-mutex mu,mu2;
-Ticket tic = Ticket();
+mutex mu,mu1,mu2;
 
 bool operator==(const Ticket &lhs, const Ticket &rhs)
 {
@@ -45,7 +44,7 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 
 bool Ticket::Order(int Id, string LineNo, int amount, string date, bool ifqueue)
 {
-	std::lock_guard<std::mutex> guard(mu);
+	std::lock_guard<std::mutex> guard(mu1);
 	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Compare
 	if (line.RemainTickets[date] < amount) {

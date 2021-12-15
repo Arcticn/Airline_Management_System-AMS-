@@ -75,6 +75,7 @@ tm AirlineInfo::SearchDesTime(string LineNo)
 
 void AirlineInfo::QueueOut(string date)
 {
+	Ticket tic = Ticket();
 	int id=Inqueuelist[date].front();
 	tic.Order(id, this->LineNo, 1, date, 1);
 	Inqueuelist[date].pop();
@@ -82,6 +83,7 @@ void AirlineInfo::QueueOut(string date)
 
 void AirlineInfo::RefreshLine()
 {
+	Ticket tic = Ticket();
 	auto it1 = AirportDatabase.begin();
 	for (; it1 != AirportDatabase.end(); ++it1) {
 		if ((*it1).AirportName == this->Departure)break;

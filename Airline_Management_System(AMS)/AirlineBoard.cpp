@@ -89,7 +89,7 @@ void AirlineBoard::desti(int ap)
 			strftime(buffer1, 10, "%R", &t1);
 			strftime(buffer2, 10, "%R", &t2);
 			cout << c << '\t' << left << setw(20) << info.SearchDepart(c) << '\t' << buffer1;
-			cout << '\t' << '\t' << buffer2 <<'\t'<<info.SearchRemainTicket(date,c) << endl;
+			cout << '\t' << '\t' << buffer2 <<'\t'<<'\t' << info.SearchRemainTicket(date, c) << endl;
 		}
 		cout << "按0返回上级菜单，按1刷新";
 		char a;

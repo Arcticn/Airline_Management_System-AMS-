@@ -1,6 +1,7 @@
 #include "AMS.h"
 
 void UserInterface::TicketOrder(int uid) {
+	Ticket tic = Ticket();
 	system("cls");
 	AirlineInfo info = AirlineInfo();
 	string Departure, Destination;
@@ -58,7 +59,8 @@ void UserInterface::TicketOrder(int uid) {
 		cout << n++ << "、" << '\n' << left << setw(8) << directLine[i] << setw(20) << DEPA[choice1 - 1] << setw(20) << DEST[choice2 - 1] << setw(8) << info.SearchRemainTicket(sDate, directLine[i])  << info.SearchDeparTime(directLine[i])  << "       " << info.SearchDesTime(directLine[i]) << "       " << setw(18) << info.SearchCompany(directLine[i]) << setw(12) << info.SearchAirplane(directLine[i]) << endl;
 		cout << "总里程：" << info.SearchDistance(directLine[i]) << "km" << endl;
 	}
-	int border = --n; n++;
+	int border = 0;
+	border = --n; n++;
 	for (size_t i = 0, length = indirectLine.size(); i < length; i++)
 	{
 		cout << n++ << "、" << "(中转)" << endl;
@@ -79,11 +81,12 @@ void UserInterface::TicketOrder(int uid) {
 	bool ifqueue;
 	if (idea == 'Y') ifqueue = 1;
 	else ifqueue = 0;
-	if (choice3 <= border) {
+	if (border != 0&&choice3==0) {
 		if (tic.Order(uid, directLine[choice3], amount, sDate, ifqueue))cout << "购票成功";
 		else cout << "购票失败，请重试";
 	}
-	else if (choice3 > border) {
+	else  {
+		if (border != 0)choice3 -= 1;
 		if (tic.Order(uid, indirectLine[choice3][0], amount, sDate, ifqueue)
 			&& tic.Order(uid, indirectLine[choice3][1], amount, sDate, ifqueue))cout << "购票成功";
 		else cout << "购票失败，请重试";
@@ -166,6 +169,7 @@ void UserInterface::AirlineSearch() {
 }
 
 void UserInterface::TicketDiscard(int uid) {
+	Ticket tic = Ticket();
 	system("cls");
 	int n = 1;
 	cout << "   " << left << setw(8) << "航班号" << setw(10) << "出发日期" << setw(20) << "出发机场" << setw(20) << "目的机场" << setw(12) << "起飞时间" << setw(12) << "抵达时间" << setw(18) << "航空公司" << setw(12) << "飞机型号" << endl;
