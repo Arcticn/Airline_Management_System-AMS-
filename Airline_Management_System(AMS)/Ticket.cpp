@@ -1,6 +1,7 @@
 #include "AMS.h"
 
-mutex mu;
+mutex mu,mu2;
+Ticket tic = Ticket();
 
 bool operator==(const Ticket &lhs, const Ticket &rhs)
 {
@@ -9,6 +10,7 @@ bool operator==(const Ticket &lhs, const Ticket &rhs)
 
 bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 {
+	std::lock_guard<std::mutex> guard(mu);
 	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Calc date
 	if (diffday > 15)return false;
@@ -20,12 +22,10 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 	string date = to_string(temp.tm_year+1900) + to_string(temp.tm_mon+1) + to_string(temp.tm_mday);
 	
 	//Compare
-	mu.lock();
 	if (line.RemainTickets[date] < amount) {
 		line.Inqueuelist.insert({ date,{} });
 		for (size_t i = 0; i < amount; i++)
 			line.Inqueuelist[date].emplace(Id);
-		mu.unlock();
 		return true;
 	}
 	else {
@@ -39,21 +39,19 @@ bool Ticket::Order(int Id, string LineNo, int amount, int diffday, bool ifqueue)
 		//Passenger Part
 		for (size_t i = 0; i < amount; i++)
 			PassengerDatabase[Id].tickets.emplace_back(Ticket(Id, LineNo, CurTime,date));
-		mu.unlock();
 		return true;
 	}
 }
 
 bool Ticket::Order(int Id, string LineNo, int amount, string date, bool ifqueue)
 {
+	std::lock_guard<std::mutex> guard(mu);
 	auto &line = AirlineInfoDatabase[LineQuickFind[LineNo]];
 	//Compare
-	mu.lock();
 	if (line.RemainTickets[date] < amount) {
 		line.Inqueuelist.insert({ date,{} });
 		for (size_t i = 0; i < amount; i++)
 			line.Inqueuelist[date].emplace(Id);
-		mu.unlock();
 		return true;
 	}
 	else {
@@ -67,13 +65,13 @@ bool Ticket::Order(int Id, string LineNo, int amount, string date, bool ifqueue)
 		//Passenger Part
 		for (size_t i = 0; i < amount; i++)
 			PassengerDatabase[Id].tickets.emplace_back(Ticket(Id, LineNo, CurTime, date));
-		mu.unlock();
 		return true;
 	}
 }
 
 bool Ticket::Refund(Ticket ticket)
 {
+	std::lock_guard<std::mutex> guard(mu2);
 	auto &line = AirlineInfoDatabase[LineQuickFind[ticket.LineNo]];
 	auto it1 = find(PassengerDatabase[ticket.Id].tickets.begin(), PassengerDatabase[ticket.Id].tickets.end(), ticket);
 	PassengerDatabase[ticket.Id].tickets.erase(it1);

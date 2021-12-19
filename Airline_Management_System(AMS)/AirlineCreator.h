@@ -3,7 +3,6 @@ class AirlineCreator {
 public:
 	void Creator();
 	void TicketCreator();
-	void TicketDestroyer();
 private:
 	string LineNoCreator();
 	string CompanyCreator();

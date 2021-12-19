@@ -80,6 +80,7 @@ void Menu::SuperUserMenu() {
         cout << "2、查询航班" << '\n';
         cout << "3、退票" << '\n';
         cout << "4、查看机票信息" << '\n';
+        cout << "5、修改航线信息" << '\n';
         cout << "0、返回上级菜单" << '\n';
         cout << "请输入您的选择：";
         char n; cin >> n;
@@ -96,6 +97,9 @@ void Menu::SuperUserMenu() {
             break;
         case '4':
             ui.SuperViewTicket();
+            break;
+        case '5':
+            ui.LineInfoChange();
             break;
         case '0':
             goto outport;

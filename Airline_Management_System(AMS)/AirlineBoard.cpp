@@ -82,7 +82,7 @@ void AirlineBoard::desti(int ap)
 		system("cls");
 		cout << CurAP << endl;
 		string date = to_string(CurTime.tm_year+1900) + to_string(CurTime.tm_mon+1) + to_string(CurTime.tm_mday);
-		cout << "机号" << '\t' << left << setw(20) << "抵达机场" << '\t' << "出发时间" << '\t' << "预计到达时间" <<'\t'<<"余票" << endl;
+		cout << "机号" << '\t' << left << setw(20) << "出发机场" << '\t' << "出发时间" << '\t' << "预计到达时间" <<'\t'<<"余票" << endl;
 		for (auto &c : Line) {
 			char buffer1[10], buffer2[10];
 			tm t1 = info.SearchDeparTime(c), t2 = info.SearchDesTime(c);

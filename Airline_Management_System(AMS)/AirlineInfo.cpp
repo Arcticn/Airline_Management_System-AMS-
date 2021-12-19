@@ -76,7 +76,49 @@ tm AirlineInfo::SearchDesTime(string LineNo)
 void AirlineInfo::QueueOut(string date)
 {
 	int id=Inqueuelist[date].front();
-	Ticket tic;
 	tic.Order(id, this->LineNo, 1, date, 1);
 	Inqueuelist[date].pop();
+}
+
+void AirlineInfo::RefreshLine()
+{
+	auto it1 = AirportDatabase.begin();
+	for (; it1 != AirportDatabase.end(); ++it1) {
+		if ((*it1).AirportName == this->Departure)break;
+	}
+	auto it2 = AirportDatabase.begin();
+	for (; it2 != AirportDatabase.end(); ++it2) {
+		if ((*it2).AirportName == this->Destination)break;
+	}
+	double distance = DistanceCalc((*it1).Latitude, (*it1).Longitude, (*it2).Latitude, (*it2).Longitude);
+	this->Distance = distance;
+	//Calculate the ESTdestinationTime
+	auto it3 = AirplaneDatabase.begin();
+	for (; it3 != AirplaneDatabase.end(); ++it3) {
+		if ((*it3).Model == this->Airplane)break;
+	}
+	tm DesTime = this->DepartureTime;
+	int diff = static_cast<int>(distance / (*it3).Speed * 60);
+	DesTime.tm_min += diff;
+	DesTime.tm_hour += (DesTime.tm_min / 60);
+	while (DesTime.tm_hour >= 24) {
+		DesTime.tm_hour -= 24;
+	}
+	DesTime.tm_min %= 60;
+	this->estDestinationTime = DesTime;
+	this->Inqueuelist.clear();
+	//Initialize Remainlists
+	tm temp = CurTime;
+	for (size_t i = 0; i <= 15; i++)
+	{
+		string date = to_string(temp.tm_year + 1900) + to_string(temp.tm_mon + 1) + to_string(temp.tm_mday);
+		this->RemainTickets[date] = (*it3).Maxpassenger;
+		for (auto c : this->Bookedlist[date]) {
+			for (auto d : PassengerDatabase[c].tickets) {
+				if (d.LineNo == this->LineNo)tic.Refund(d);
+			}
+		}
+		Bookedlist[date].clear();
+		temp = temp + 1;
+	}
 }

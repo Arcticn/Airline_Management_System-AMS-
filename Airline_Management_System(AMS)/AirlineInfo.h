@@ -31,6 +31,7 @@ public:
     tm SearchDeparTime(string LineNo);
     tm SearchDesTime(string LineNo);
     void QueueOut(string date);
+    void RefreshLine();
 private:
 
 };

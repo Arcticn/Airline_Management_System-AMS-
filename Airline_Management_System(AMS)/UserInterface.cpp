@@ -53,24 +53,23 @@ void UserInterface::TicketOrder(int uid) {
 	vector<vector<string>>indirectLine(info.SearchIndirectLine(DEPA[choice1 - 1], DEST[choice2 - 1]));
 	sort(indirectLine.begin(), indirectLine.end(), [&info](const vector<string> &v1, const vector<string> &v2) {return (info.SearchDistance(v1[0]) + info.SearchDistance(v1[1])) < (info.SearchDistance(v2[0]) + info.SearchDistance(v2[1])); });
 	n = 1;
-	cout << left << setw(8) << "航班号" << setw(20) << "出发机场" << setw(20) << "目的机场" << setw(8) << "余票量" /* << setw(12) << "起飞时间" << setw(12) << "抵达时间" */ << setw(18) << "航空公司" << setw(12) << "飞机型号" << endl;
+	cout << left << setw(8) << "航班号" << setw(20) << "出发机场" << setw(20) << "目的机场" << setw(8) << "余票量"  << setw(12) << "起飞时间" << setw(12) << "抵达时间"  << setw(18) << "航空公司" << setw(12) << "飞机型号" << endl;
 	for (size_t i = 0, length = directLine.size(); i < length; i++) {
-		cout << n++ << "、" << '\n' << left << setw(8) << directLine[i] << setw(20) << DEPA[choice1 - 1] << setw(20) << DEST[choice2 - 1] << setw(8) << info.SearchRemainTicket(sDate, directLine[i]) /* << info.SearchDeparTime(directLine[i])  << "       " << info.SearchDesTime(directLine[i]) << "       "*/ << setw(18) << info.SearchCompany(directLine[i]) << setw(12) << info.SearchAirplane(directLine[i]) << endl;
+		cout << n++ << "、" << '\n' << left << setw(8) << directLine[i] << setw(20) << DEPA[choice1 - 1] << setw(20) << DEST[choice2 - 1] << setw(8) << info.SearchRemainTicket(sDate, directLine[i])  << info.SearchDeparTime(directLine[i])  << "       " << info.SearchDesTime(directLine[i]) << "       " << setw(18) << info.SearchCompany(directLine[i]) << setw(12) << info.SearchAirplane(directLine[i]) << endl;
 		cout << "总里程：" << info.SearchDistance(directLine[i]) << "km" << endl;
 	}
 	int border = --n; n++;
 	for (size_t i = 0, length = indirectLine.size(); i < length; i++)
 	{
 		cout << n++ << "、" << "(中转)" << endl;
-		cout << left << setw(8) << indirectLine[i][0] << setw(20) << info.SearchDepart(indirectLine[i][0]) << setw(20) << info.SearchDesti(indirectLine[i][0]) << setw(8) << info.SearchRemainTicket(sDate, indirectLine[i][0])  /* << info.SearchDeparTime(indirectLine[i][0]) << "       " << info.SearchDesTime(indirectLine[i][0]) << "       " */ << setw(18) << info.SearchCompany(indirectLine[i][0]) << setw(12) << info.SearchAirplane(indirectLine[i][0]) << endl;
-		cout << left << setw(8) << indirectLine[i][1] << setw(20) << info.SearchDepart(indirectLine[i][1]) << setw(20) << info.SearchDesti(indirectLine[i][1]) << setw(8) << info.SearchRemainTicket(sDate, indirectLine[i][1])  /* << info.SearchDeparTime(indirectLine[i][1]) << "       " << info.SearchDesTime(indirectLine[i][1]) << "       " */ << setw(18) << info.SearchCompany(indirectLine[i][1]) << setw(12) << info.SearchAirplane(indirectLine[i][1]) << endl;
+		cout << left << setw(8) << indirectLine[i][0] << setw(20) << info.SearchDepart(indirectLine[i][0]) << setw(20) << info.SearchDesti(indirectLine[i][0]) << setw(8) << info.SearchRemainTicket(sDate, indirectLine[i][0])   << info.SearchDeparTime(indirectLine[i][0]) << "       " << info.SearchDesTime(indirectLine[i][0]) << "       "  << setw(18) << info.SearchCompany(indirectLine[i][0]) << setw(12) << info.SearchAirplane(indirectLine[i][0]) << endl;
+		cout << left << setw(8) << indirectLine[i][1] << setw(20) << info.SearchDepart(indirectLine[i][1]) << setw(20) << info.SearchDesti(indirectLine[i][1]) << setw(8) << info.SearchRemainTicket(sDate, indirectLine[i][1])   << info.SearchDeparTime(indirectLine[i][1]) << "       " << info.SearchDesTime(indirectLine[i][1]) << "       "  << setw(18) << info.SearchCompany(indirectLine[i][1]) << setw(12) << info.SearchAirplane(indirectLine[i][1]) << endl;
 		cout << "总里程：" << info.SearchDistance(indirectLine[i][0]) + info.SearchDistance(indirectLine[i][1]) << "km" << endl;
 	}
 	cout << "请输入您的选择：";
 	int choice3;
 	cin >> choice3;
 	choice3 -= 1; //同步序号
-	Ticket tic = Ticket();
 	cout << "请输入您想要购买的机票数目（整条航线）：";
 	int amount = 1;
 	cin >> amount;
@@ -147,17 +146,17 @@ void UserInterface::AirlineSearch() {
 	vector<vector<string>>indirectLine(info.SearchIndirectLine(DEPA[choice1 - 1], DEST[choice2 - 1]));
 	sort(indirectLine.begin(), indirectLine.end(), [&info](const vector<string> &v1, const vector<string> &v2) {return (info.SearchDistance(v1[0]) + info.SearchDistance(v1[1])) < (info.SearchDistance(v2[0]) + info.SearchDistance(v2[1])); });
 	n = 1;
-	cout << left << setw(8) << "航班号" << setw(20) << "出发机场" << setw(20) << "目的机场" << setw(8) << "余票量" /* << setw(12) << "起飞时间" << setw(12) << "抵达时间" */<< setw(18) << "航空公司" << setw(12) << "飞机型号" << endl;
+	cout << left << setw(8) << "航班号" << setw(20) << "出发机场" << setw(20) << "目的机场" << setw(8) << "余票量"  << setw(12) << "起飞时间" << setw(12) << "抵达时间" << setw(18) << "航空公司" << setw(12) << "飞机型号" << endl;
 	for (size_t i = 0, length = directLine.size(); i < length; i++) {
-		cout << n++ << "、" << '\n' << left << setw(8) << directLine[i] << setw(20) << DEPA[choice1 - 1] << setw(20) << DEST[choice2 - 1] << setw(8) << info.SearchRemainTicket(sDate, directLine[i]) /* << info.SearchDeparTime(directLine[i])  << "       " << info.SearchDesTime(directLine[i]) << "       "*/ << setw(18) << info.SearchCompany(directLine[i]) << setw(12) << info.SearchAirplane(directLine[i]) << endl;
+		cout << n++ << "、" << '\n' << left << setw(8) << directLine[i] << setw(20) << DEPA[choice1 - 1] << setw(20) << DEST[choice2 - 1] << setw(8) << info.SearchRemainTicket(sDate, directLine[i])  << info.SearchDeparTime(directLine[i])  << "       " << info.SearchDesTime(directLine[i]) << "       " << setw(18) << info.SearchCompany(directLine[i]) << setw(12) << info.SearchAirplane(directLine[i]) << endl;
 		cout << "总里程：" << info.SearchDistance(directLine[i]) << "km" << endl;
 	}
 	int border = --n; n++;
 	for (size_t i = 0, length = indirectLine.size(); i < length; i++)
 	{
 		cout << n++ << "、" << "(中转)" << endl;
-		cout << left << setw(8) << indirectLine[i][0] << setw(20) << info.SearchDepart(indirectLine[i][0]) << setw(20) << info.SearchDesti(indirectLine[i][0]) << setw(8) << info.SearchRemainTicket(sDate, indirectLine[i][0])  /* << info.SearchDeparTime(indirectLine[i][0]) << "       " << info.SearchDesTime(indirectLine[i][0]) << "       " */ << setw(18) << info.SearchCompany(indirectLine[i][0]) << setw(12) << info.SearchAirplane(indirectLine[i][0]) << endl;
-		cout << left << setw(8) << indirectLine[i][1] << setw(20) << info.SearchDepart(indirectLine[i][1]) << setw(20) << info.SearchDesti(indirectLine[i][1]) << setw(8) << info.SearchRemainTicket(sDate, indirectLine[i][1])  /* << info.SearchDeparTime(indirectLine[i][1]) << "       " << info.SearchDesTime(indirectLine[i][1]) << "       " */ << setw(18) << info.SearchCompany(indirectLine[i][1]) << setw(12) << info.SearchAirplane(indirectLine[i][1]) << endl;
+		cout << left << setw(8) << indirectLine[i][0] << setw(20) << info.SearchDepart(indirectLine[i][0]) << setw(20) << info.SearchDesti(indirectLine[i][0]) << setw(8) << info.SearchRemainTicket(sDate, indirectLine[i][0])   << info.SearchDeparTime(indirectLine[i][0]) << "       " << info.SearchDesTime(indirectLine[i][0]) << "       "  << setw(18) << info.SearchCompany(indirectLine[i][0]) << setw(12) << info.SearchAirplane(indirectLine[i][0]) << endl;
+		cout << left << setw(8) << indirectLine[i][1] << setw(20) << info.SearchDepart(indirectLine[i][1]) << setw(20) << info.SearchDesti(indirectLine[i][1]) << setw(8) << info.SearchRemainTicket(sDate, indirectLine[i][1])   << info.SearchDeparTime(indirectLine[i][1]) << "       " << info.SearchDesTime(indirectLine[i][1]) << "       "  << setw(18) << info.SearchCompany(indirectLine[i][1]) << setw(12) << info.SearchAirplane(indirectLine[i][1]) << endl;
 		cout << "总里程：" << info.SearchDistance(indirectLine[i][0]) + info.SearchDistance(indirectLine[i][1]) << "km" << endl;
 	}
 	cout << "按任意键返回上级菜单";
@@ -180,7 +179,6 @@ void UserInterface::TicketDiscard(int uid) {
 	int choice;
 	cin >> choice;
 	choice -= 1;//Sync
-	Ticket tic = Ticket();
 	if(tic.Refund(PassengerDatabase[uid].tickets[choice]))cout<<"退票成功！";
 	cout << "\n" << "正在返回上级菜单...";
 	this_thread::sleep_for(chrono::milliseconds(700));

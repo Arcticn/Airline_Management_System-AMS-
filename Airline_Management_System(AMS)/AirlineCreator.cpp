@@ -46,7 +46,6 @@ void AirlineCreator::Creator() {
 
 void AirlineCreator::TicketCreator()
 {
-	Ticket tic = Ticket();
 	auto end = high_resolution_clock::now();
 	default_random_engine e;
 	nano_type diff = end - start;
@@ -58,7 +57,7 @@ void AirlineCreator::TicketCreator()
 		diff = end - start;
 		e.seed(diff.count());
 		tic.Order(u2(e),AirlineInfoDatabase[u1(e)].LineNo,1,u3(e),1);
-		this_thread::sleep_for(chrono::nanoseconds(1));
+		this_thread::sleep_for(chrono::nanoseconds(100));
 	}
 	return;
 }

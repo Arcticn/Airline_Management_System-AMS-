@@ -6,5 +6,6 @@ public:
 	void SuperAirlineSearch();
 	void SuperTicketDiscard();
 	void SuperViewTicket();
+	void LineInfoChange();
 private:
 };

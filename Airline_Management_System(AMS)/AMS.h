@@ -32,3 +32,5 @@ extern unordered_map<string, int>UserToID; //用户账号的用户名 -> 客户ID
 extern unordered_map<string, int>LineQuickFind; //航班号 -> AirlineInfoDatabase中对应的下标
 extern map<string, string>Superuser; // 存储超级用户的用户名和密码
 extern unordered_map<string, string>User; // 存储普通用户的用户名和密码
+
+extern Ticket tic;
